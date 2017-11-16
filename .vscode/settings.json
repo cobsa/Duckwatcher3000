@@ -11,5 +11,8 @@
   "editor.formatOnSave": true,
   "window.zoomLevel": 0,
   "prettier.cssEnable": ["css", "less", "scss"],
-  "prettier.jsonEnable": ["json"]
+  "prettier.jsonEnable": [
+    "json"
+  ],
+  "editor.tabSize": 2
 }
