@@ -1,0 +1,15 @@
+{
+  "window.menuBarVisibility": "default",
+  "files.autoSave": "afterDelay",
+  "git.enableSmartCommit": true,
+  "emmet.syntaxProfiles": {
+    "blade": "html"
+  },
+  "extensions.ignoreRecommendations": false,
+  "[javascript]": {},
+  "cSpell.userWords": ["unmount"],
+  "editor.formatOnSave": true,
+  "window.zoomLevel": 0,
+  "prettier.cssEnable": ["css", "less", "scss"],
+  "prettier.jsonEnable": ["json"]
+}
