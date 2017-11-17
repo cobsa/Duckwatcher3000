@@ -1,3 +1,19 @@
 .content {
   margin-top: 1em;
 }
+/* Overriding datepicker css stylings*/
+.react-datepicker__input-container {
+  display: block !important;
+}
+.react-datepicker-wrapper {
+  display: block !important;
+}
+.react-datepicker__time-container {
+  min-width: 150px;
+}
+.react-datepicker__time-box {
+  min-width: 150px;
+}
+.react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
+  right: 150px !important;
+}
