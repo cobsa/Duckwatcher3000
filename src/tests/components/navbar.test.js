@@ -7,11 +7,10 @@ import Enzyme from 'enzyme'
 import { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
-import AddSighting from '../../pages/sightings'
+import NavBar from '../../components/navbar'
 
 Enzyme.configure({ adapter: new Adapter() })
-
-test('Sightings Page renders', () => {
-  const page = shallow(<AddSighting />)
-  expect(page.exists()).toBeTruthy()
+const navbar = shallow(<NavBar />)
+test('Only two clickable links', () => {
+  expect(navbar.find('li')).toHaveLength(2)
 })
