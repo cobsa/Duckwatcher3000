@@ -43,6 +43,15 @@ export default class AddSighting extends React.Component {
           />
         </div>
         <div className="form-group">
+          <label htmlFor="inputDescription">Description</label>
+          <input
+            type="text"
+            className="form-control"
+            id="inputDescription"
+            placeholder="Short description about sighting"
+          />
+        </div>
+        <div className="form-group">
           <label htmlFor="inputDateTime">Time</label>
           <DatePicker
             selected={this.state.startTime}
