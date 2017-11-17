@@ -8,7 +8,21 @@ export default class AddSighting extends React.Component {
   constructor() {
     super()
     this.state = {
-      startTime: moment()
+      startTime: moment(),
+      species: [
+        {
+          name: 'Mallard'
+        },
+        {
+          name: 'Mallard1'
+        },
+        {
+          name: 'Mallard2'
+        },
+        {
+          name: 'Mallard3'
+        }
+      ]
     }
     this.handleDateTimeChange = this.handleDateTimeChange.bind(this)
   }
@@ -21,16 +35,18 @@ export default class AddSighting extends React.Component {
   }
 
   render() {
+    // Populate drop down selection with duck names
+    const { species } = this.state
+    const speciesOptions = species.map(specie => {
+      return <option key={specie.name}>{specie.name}</option>
+    })
+
     return (
       <form>
         <div className="form-group">
           <label htmlFor="speciesSelect">Select species</label>
           <select className="form-control" id="speciesSelect">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+            {speciesOptions}
           </select>
         </div>
         <div className="form-group">
