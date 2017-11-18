@@ -9,6 +9,7 @@ import { GETSPECIES } from '../redux/constants/species'
 import { FETCHED } from '../redux/constants/sightings'
 
 import TextInput from '../components/form/textInput'
+import SelectInput from '../components/form/selectInput'
 
 const mapStateToProps = state => {
   return {
@@ -34,8 +35,14 @@ class AddSightingComponent extends React.Component {
     this.handleDescription = this.handleDescription.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleCount = this.handleCount.bind(this)
+    this.handleSpecies = this.handleSpecies.bind(this)
+    this.validateInputs = this.validateInputs.bind(this)
     this.state = {
       startTime: moment(),
+      species: {
+        value: '',
+        valid: undefined
+      },
       description: {
         value: '',
         valid: undefined
@@ -81,14 +88,68 @@ class AddSightingComponent extends React.Component {
     })
   }
 
+  handleSpecies(e) {
+    // TODO: Find way to clean code?
+    const { value } = e.target
+    const { species } = this.props.species
+    const valid = species.find(duck => {
+      if (duck.name == value) {
+        return true
+      }
+    })
+    if (valid) {
+      this.setState({
+        species: {
+          value,
+          valid: true
+        }
+      })
+    } else {
+      this.setState({
+        species: {
+          value,
+          valid: false
+        }
+      })
+    }
+  }
+
   handleDateTimeChange(date) {
     this.setState({
       startTime: date
     })
   }
+  validateInputs() {
+    // Check that all inputs are valid
+    if (!this.state.count.valid) {
+      this.setState({
+        count: {
+          ...this.state.count,
+          valid: false
+        }
+      })
+    }
+    if (!this.state.description.valid) {
+      this.setState({
+        description: {
+          ...this.state.description,
+          valid: false
+        }
+      })
+    }
+    if (!this.state.species.valid) {
+      this.setState({
+        species: {
+          ...this.state.species,
+          valid: false
+        }
+      })
+    }
+  }
 
   handleSubmit(event) {
-    this.props.addSighting()
+    event.preventDefault()
+    this.validateInputs()
   }
 
   render() {
@@ -100,12 +161,15 @@ class AddSightingComponent extends React.Component {
       })
       return (
         <form onSubmit={this.handleSubmit} noValidate>
-          <div className="form-group">
-            <label htmlFor="speciesSelect">Select species</label>
-            <select className="form-control" id="speciesSelect">
-              {speciesOptions}
-            </select>
-          </div>
+          <SelectInput
+            name="Select Species"
+            id="speciesSelect"
+            defaultValue="Select duck species"
+            errorMessage="Please select duck species from list"
+            optionsList={speciesOptions}
+            onChange={this.handleSpecies}
+            valid={this.state.species.valid}
+          />
           <TextInput
             name="Count"
             id="inputCount"
