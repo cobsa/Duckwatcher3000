@@ -25,10 +25,15 @@ export default class AddSighting extends React.Component {
       ]
     }
     this.handleDateTimeChange = this.handleDateTimeChange.bind(this)
+    this.handleDescription = this.handleDescription.bind(this)
   }
 
+  handleDescription(e) {
+    e.preventDefault()
+    // TODO: Implement
+  }
   handleDateTimeChange(date) {
-    console.log(date)
+    console.log('Triggered')
     this.setState({
       startTime: date
     })
@@ -65,6 +70,7 @@ export default class AddSighting extends React.Component {
             className="form-control"
             id="inputDescription"
             placeholder="Short description about sighting"
+            onChange={this.handleDescription}
           />
         </div>
         <div className="form-group">
