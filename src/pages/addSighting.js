@@ -3,8 +3,24 @@ import DatePicker from 'react-datepicker'
 import moment from 'moment'
 
 import 'react-datepicker/dist/react-datepicker.css'
+import { addSightingAction } from '../redux/actions/sightingsActions'
+import { connect } from 'react-redux'
 
-export default class AddSighting extends React.Component {
+const mapStateToProps = state => {
+  return {
+    species: state.species
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addSightingAction: (species, dateTime, description, count) => {
+      dispatch(addSighting(species, dateTime, description, count))
+    }
+  }
+}
+
+class AddSightingComponent extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -26,6 +42,7 @@ export default class AddSighting extends React.Component {
     }
     this.handleDateTimeChange = this.handleDateTimeChange.bind(this)
     this.handleDescription = this.handleDescription.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleDescription(e) {
@@ -39,6 +56,8 @@ export default class AddSighting extends React.Component {
     })
   }
 
+  handleSubmit(event) {}
+
   render() {
     // Populate drop down selection with duck names
     const { species } = this.state
@@ -47,7 +66,7 @@ export default class AddSighting extends React.Component {
     })
 
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label htmlFor="speciesSelect">Select species</label>
           <select className="form-control" id="speciesSelect">
@@ -92,3 +111,7 @@ export default class AddSighting extends React.Component {
     )
   }
 }
+
+const addSighting = connect(mapStateToProps, mapDispatchToProps)(AddSightingComponent)
+
+export default addSighting
