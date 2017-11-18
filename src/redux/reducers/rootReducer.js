@@ -2,10 +2,12 @@ import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 
 import sightings from './sightingsReducer'
+import species from './speciesReducer'
 
 const rootReducer = combineReducers({
   router: routerReducer,
-  sightings: sightings
+  sightings: sightings,
+  species: species
 })
 
 export default rootReducer
