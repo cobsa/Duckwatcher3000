@@ -8,16 +8,21 @@ import logger from 'redux-logger'
 import { createBrowserHistory } from 'history'
 import { Route } from 'react-router'
 import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap'
+import createSageMiddleware from 'redux-saga'
 // Custom packages
 import Sightings from './pages/sightings'
 import AddSighting from './pages/addSighting'
-import rootReducer from './reducers/rootReducer'
+import rootReducer from './redux/reducers/rootReducer'
 import Navbar from './components/navbar'
+import rootSaga from './redux/sagas/sagas'
 
+// Setup store with history, logger and sagaMiddleware
 const history = createBrowserHistory()
-const middleware = routerMiddleware(history)
+const sagaMiddleware = createSageMiddleware()
+const middleware = [routerMiddleware(history), logger, sagaMiddleware]
 
-let store = createStore(rootReducer, applyMiddleware(logger))
+let store = createStore(rootReducer, applyMiddleware(...middleware))
+sagaMiddleware.run(rootSaga)
 
 var app = document.getElementById('app')
 ReactDom.render(

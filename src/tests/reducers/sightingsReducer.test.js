@@ -1,6 +1,6 @@
-import { sightings } from '../../redux/reducers/sightingsReducer'
+import sightings from '../../redux/reducers/sightingsReducer'
 
-import { UPDATEALL, FETCHING, FETCHED, ERROR } from '../../redux/constants/sightings'
+import { FETCHING, FETCHED, ERROR, SIGHTINGS } from '../../redux/constants/sightings'
 
 const initialState = {
   fetching: false,
@@ -16,7 +16,7 @@ test('Should return initial state', () => {
 test('Should update all sightings', () => {
   expect(
     sightings(undefined, {
-      type: UPDATEALL,
+      type: SIGHTINGS,
       payload: {
         sightings: [
           {
@@ -30,7 +30,7 @@ test('Should update all sightings', () => {
     })
   ).toEqual({
     fetching: false,
-    fetched: false,
+    fetched: true,
     error: undefined,
     sightings: [
       {

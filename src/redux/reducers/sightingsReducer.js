@@ -1,4 +1,4 @@
-import { UPDATEALL, FETCHING, FETCHED, ERROR } from '../constants/sightings'
+import { SIGHTINGS, FETCHING, FETCHED, ERROR } from '../constants/sightings'
 
 /* 
     State layout:
@@ -24,12 +24,13 @@ let initialState = {
   sightings: []
 }
 
-export const sightings = (state = initialState, action) => {
+const sightings = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATEALL:
+    case SIGHTINGS:
       // Replaces state
       return {
         ...state,
+        fetched: true,
         sightings: action.payload.sightings
       }
     case FETCHING: {
@@ -60,3 +61,5 @@ export const sightings = (state = initialState, action) => {
       return state
   }
 }
+
+export default sightings
