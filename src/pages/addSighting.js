@@ -11,6 +11,7 @@ import { FETCHED } from '../redux/constants/sightings'
 import TextInput from '../components/form/textInput'
 import SelectInput from '../components/form/selectInput'
 
+// Connect to store
 const mapStateToProps = state => {
   return {
     species: state.species
@@ -19,8 +20,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addSightingAction: (species, dateTime, description, count) => {
-      dispatch(addSighting(species, dateTime, description, count))
+    addSighting: (species, dateTime, description, count) => {
+      dispatch(addSightingAction(species, dateTime, description, count))
     },
     getSpecies: () => {
       dispatch({ type: GETSPECIES })
@@ -38,7 +39,7 @@ class AddSightingComponent extends React.Component {
     this.handleSpecies = this.handleSpecies.bind(this)
     this.validateInputs = this.validateInputs.bind(this)
     this.state = {
-      startTime: moment(),
+      dateTime: moment().startOf('hour'),
       species: {
         value: '',
         valid: undefined
@@ -48,7 +49,7 @@ class AddSightingComponent extends React.Component {
         valid: undefined
       },
       count: {
-        value: undefined,
+        value: 0,
         valid: undefined
       }
     }
@@ -116,11 +117,12 @@ class AddSightingComponent extends React.Component {
 
   handleDateTimeChange(date) {
     this.setState({
-      startTime: date
+      dateTime: date
     })
   }
   validateInputs() {
     // Check that all inputs are valid
+    let allValid = true
     if (!this.state.count.valid) {
       this.setState({
         count: {
@@ -128,6 +130,7 @@ class AddSightingComponent extends React.Component {
           valid: false
         }
       })
+      allValid = false
     }
     if (!this.state.description.valid) {
       this.setState({
@@ -136,6 +139,7 @@ class AddSightingComponent extends React.Component {
           valid: false
         }
       })
+      allValid = false
     }
     if (!this.state.species.valid) {
       this.setState({
@@ -144,12 +148,23 @@ class AddSightingComponent extends React.Component {
           valid: false
         }
       })
+      allValid = false
     }
+    return allValid
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    this.validateInputs()
+    // Convert date to iso 8601
+    let date = this.state.dateTime.format('YYYY:MM:DDTHH:MM:SS')
+    if (this.validateInputs()) {
+      this.props.addSighting(
+        this.state.species.value,
+        date,
+        this.state.description.value,
+        this.state.count.value
+      )
+    }
   }
 
   render() {
@@ -193,13 +208,14 @@ class AddSightingComponent extends React.Component {
           <div className="form-group">
             <label htmlFor="inputDateTime">Time</label>
             <DatePicker
-              selected={this.state.startTime}
+              selected={this.state.dateTime}
               onChange={this.handleDateTimeChange}
               showTimeSelect
               timeFormat="HH:mm"
-              timeIntervals={15}
+              timeIntervals={60}
               dateFormat="LLL"
               className="form-control"
+              maxDate={moment()}
             />
           </div>
           <button type="submit" className="btn btn-primary">

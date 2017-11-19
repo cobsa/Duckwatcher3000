@@ -31,6 +31,20 @@ export function* updateSpecies() {
   }
 }
 
+export function* addSighting(action) {
+  try {
+    const response = yield call(axios.post, backend + '/sightings', {
+      dateTime: action.payload.dateTime,
+      description: action.payload.description,
+      species: action.payload.species,
+      count: action.payload.count
+    })
+    yield put(sightingActions.updateAll())
+  } catch (e) {
+    yield put(sightingActions.setError(e))
+  }
+}
+
 // Watcher sagas
 export function* watchSightings() {
   yield takeEvery(sightingConstants.UPDATEALL, updateSightings)
@@ -40,6 +54,10 @@ export function* watchSpecies() {
   yield takeEvery(speciesConstants.GETSPECIES, updateSpecies)
 }
 
+export function* watchAddingSightings() {
+  yield takeEvery(sightingConstants.ADDSIGHTING, addSighting)
+}
+
 export default function* rootSaga() {
-  yield all([watchSightings(), watchSpecies()])
+  yield all([watchSightings(), watchSpecies(), watchAddingSightings()])
 }
