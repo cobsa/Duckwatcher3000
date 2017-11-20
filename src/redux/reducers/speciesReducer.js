@@ -1,4 +1,4 @@
-import { GETALL, SETERROR, FETCHED, FETCHING, SETSPECIES } from '../constants/species'
+import { GETALL, SETERROR, FETCHED, FETCHING, SETSPECIES, RESETSPECIES } from '../constants/species'
 
 const initialState = {
   fetching: false,
@@ -34,6 +34,12 @@ const species = (state = initialState, action) => {
         ...state,
         fetching: false,
         fetched: true
+      }
+    }
+    case RESETSPECIES: {
+      return {
+        ...state,
+        error: undefined
       }
     }
     default:

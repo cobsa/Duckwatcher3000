@@ -1,4 +1,4 @@
-import { SIGHTINGS, FETCHING, FETCHED, ERROR } from '../constants/sightings'
+import { SIGHTINGS, FETCHING, FETCHED, ERROR, RESETSIGHTINGS } from '../constants/sightings'
 
 /* 
     State layout:
@@ -55,6 +55,12 @@ const sightings = (state = initialState, action) => {
         fetched: false,
         fetching: false,
         error: action.payload.error
+      }
+    }
+    case RESETSIGHTINGS: {
+      return {
+        ...state,
+        error: undefined
       }
     }
     default:

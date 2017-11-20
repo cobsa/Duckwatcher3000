@@ -3,6 +3,7 @@ import React from 'react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 import 'react-datepicker/dist/react-datepicker.css'
 import { addSightingAction } from '../redux/actions/sightingsActions'
@@ -13,9 +14,9 @@ import TextInput from '../components/form/textInput'
 import SelectInput from '../components/form/selectInput'
 
 // Connect to store
-const mapStateToProps = state => {
+const mapStateToProps = store => {
   return {
-    species: state.species
+    species: store.species
   }
 }
 
@@ -52,7 +53,8 @@ class AddSightingComponent extends React.Component {
       count: {
         value: 0,
         valid: undefined
-      }
+      },
+      redirect: false
     }
   }
 
@@ -165,6 +167,10 @@ class AddSightingComponent extends React.Component {
         this.state.description.value,
         this.state.count.value
       )
+      // Redirect and show confirmation?
+      this.setState({
+        redirect: true
+      })
     }
   }
 
@@ -175,6 +181,11 @@ class AddSightingComponent extends React.Component {
       const speciesOptions = species.map(specie => {
         return <option key={specie.name}>{specie.name}</option>
       })
+      if (this.state.redirect) {
+        // Redirect if adding successful
+        return <Redirect to="/" />
+      }
+
       return (
         <form onSubmit={this.handleSubmit} noValidate>
           <SelectInput

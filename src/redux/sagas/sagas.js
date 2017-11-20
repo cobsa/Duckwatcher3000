@@ -17,7 +17,7 @@ export function* updateSightings() {
     const response = yield call(axios, backend + '/sightings')
     yield put(sightingActions.setSightings(response.data))
   } catch (e) {
-    yield put(sightingActions.setError(e))
+    yield put(sightingActions.setError(e.message))
   }
 }
 
@@ -27,7 +27,7 @@ export function* updateSpecies() {
     const response = yield call(axios, backend + '/species')
     yield put(speciesActions.setSpecies(response.data))
   } catch (e) {
-    yield put(speciesActions.setError(e))
+    yield put(speciesActions.setError(e.message))
   }
 }
 
@@ -41,7 +41,7 @@ export function* addSighting(action) {
     })
     yield put(sightingActions.updateAll())
   } catch (e) {
-    yield put(sightingActions.setError(e))
+    yield put(sightingActions.setError(e.message))
   }
 }
 
