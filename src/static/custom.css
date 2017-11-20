@@ -17,3 +17,28 @@
 .react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
   right: 150px !important;
 }
+
+/* Icon styling*/
+.sortButtons {
+}
+
+/* Remove button styling*/
+.sortButton {
+  line-height: 1;
+  background: none !important;
+  color: inherit;
+  border: none;
+  padding: 0 !important;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit !important;
+}
+
+.material-icons {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.active-icon {
+  color: red;
+}
