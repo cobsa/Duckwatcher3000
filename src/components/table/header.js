@@ -1,3 +1,5 @@
+/* Custom table header. Allows to toggle sort direction and type */
+
 import React from 'react'
 
 export default class Header extends React.Component {

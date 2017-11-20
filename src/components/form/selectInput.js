@@ -1,3 +1,5 @@
+/* Component that renders drop down selection input */
+
 import React from 'react'
 
 export default class SelectInput extends React.Component {

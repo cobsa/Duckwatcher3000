@@ -1,3 +1,4 @@
+/* Page where user can add new sighting. Takes care of user input validation */
 import React from 'react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'

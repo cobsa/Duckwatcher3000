@@ -3,10 +3,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 // Custom packages
-import Sighting from '../components/sighting'
+
 import { UPDATEALL } from '../redux/constants/sightings'
 import sortBy from '../components/sortBy'
 import Header from '../components/table/header'
+import Sighting from '../components/table/row'
 
 const mapStateToProps = state => {
   return {
