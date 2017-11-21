@@ -1,7 +1,7 @@
 /* Sorts array of objects by "orderBy" attribute.
 Default sorting ascending */
 
-const sortBy = (array, orderBy, descending) => {
+const sortBy = (array, orderBy, descending = false) => {
   function compare(a, b) {
     if (a[orderBy] < b[orderBy]) {
       return -1

@@ -22,7 +22,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-class ShowErrorComponent extends React.Component {
+export class ShowErrorComponent extends React.Component {
   render() {
     const { speciesError, sightingsError } = this.props
     let errors = [speciesError, sightingsError]
@@ -34,7 +34,7 @@ class ShowErrorComponent extends React.Component {
   }
 }
 
-class Error extends React.Component {
+export class Error extends React.Component {
   render() {
     if (this.props.message == undefined) {
       return null
