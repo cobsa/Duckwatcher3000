@@ -7,8 +7,7 @@ import Enzyme from 'enzyme'
 import { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
-
-import Sighting from '../../components/sighting'
+import Sighting from '../../components/table/row'
 
 Enzyme.configure({ adapter: new Adapter() })
 const props = {
@@ -28,4 +27,22 @@ test('Sighting renders props correctly', () => {
       .first()
       .text()
   ).toBe('Mallard')
+  expect(
+    sighting
+      .find('th')
+      .at(1)
+      .text()
+  ).toBe(props.description)
+  expect(
+    sighting
+      .find('th')
+      .at(2)
+      .text()
+  ).toBe(props.count.toString())
+  expect(
+    sighting
+      .find('th')
+      .at(3)
+      .text()
+  ).toBe(props.dateTime)
 })

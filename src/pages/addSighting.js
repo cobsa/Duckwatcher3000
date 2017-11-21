@@ -32,7 +32,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-class AddSightingComponent extends React.Component {
+export class AddSightingComponent extends React.Component {
   constructor() {
     super()
     this.handleDateTimeChange = this.handleDateTimeChange.bind(this)

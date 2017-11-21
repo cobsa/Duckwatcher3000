@@ -1,6 +1,12 @@
 import sightings from '../../redux/reducers/sightingsReducer'
 
-import { FETCHING, FETCHED, ERROR, SIGHTINGS } from '../../redux/constants/sightings'
+import {
+  FETCHING,
+  FETCHED,
+  ERROR,
+  SIGHTINGS,
+  RESETSIGHTINGS
+} from '../../redux/constants/sightings'
 
 const initialState = {
   fetching: false,
@@ -92,6 +98,21 @@ test('Should set error state', () => {
     fetching: false,
     fetched: false,
     error: 'Some error',
+    sightings: []
+  })
+})
+
+test('Should reset error state to default', () => {
+  const errorState = {
+    fetching: false,
+    fetched: false,
+    error: 'Some error',
+    sightings: []
+  }
+  expect(sightings(errorState, { type: RESETSIGHTINGS })).toEqual({
+    fetching: false,
+    fetched: false,
+    error: undefineda,
     sightings: []
   })
 })
