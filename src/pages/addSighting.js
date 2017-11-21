@@ -12,6 +12,7 @@ import { FETCHED } from '../redux/constants/sightings'
 
 import TextInput from '../components/form/textInput'
 import SelectInput from '../components/form/selectInput'
+import Loading from '../components/loading'
 
 // Connect to store
 const mapStateToProps = store => {
@@ -79,17 +80,21 @@ class AddSightingComponent extends React.Component {
 
   handleCount(e) {
     e.preventDefault()
-    const { value } = e.target
-    let valid = false
-    if (value > 0) {
-      valid = true
-    }
-    this.setState({
-      count: {
-        value,
-        valid
+    // Check if value is null
+    if (e.target.value != '') {
+      console.log(e.target.value)
+      const value = parseInt(e.target.value)
+      let valid = false
+      if (value > 0) {
+        valid = true
       }
-    })
+      this.setState({
+        count: {
+          value,
+          valid
+        }
+      })
+    }
   }
 
   handleSpecies(e) {
@@ -159,7 +164,8 @@ class AddSightingComponent extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     // Convert date to iso 8601
-    let date = this.state.dateTime.format('YYYY:MM:DDTHH:MM:SS')
+    // Z means timezone which shouldn't be in program according to manual
+    let date = this.state.dateTime.format('YYYY:MM:DDTHH:mm:ss') + 'Z'
     if (this.validateInputs()) {
       this.props.addSighting(
         this.state.species.value,
@@ -224,7 +230,7 @@ class AddSightingComponent extends React.Component {
               onChange={this.handleDateTimeChange}
               showTimeSelect
               timeFormat="HH:mm"
-              timeIntervals={60}
+              timeIntervals={15}
               dateFormat="LLL"
               className="form-control"
               maxDate={moment()}
@@ -236,7 +242,7 @@ class AddSightingComponent extends React.Component {
         </form>
       )
     } else {
-      return <div>Loading</div>
+      return <Loading />
     }
   }
 }

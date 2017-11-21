@@ -9,6 +9,8 @@ import sortBy from '../components/sortBy'
 import Header from '../components/table/header'
 import Sighting from '../components/table/row'
 
+import Loading from '../components/loading'
+
 const mapStateToProps = state => {
   return {
     sightings: state.sightings
@@ -59,9 +61,8 @@ class SightingsComponent extends React.Component {
         return <Sighting key={sighting.id} {...sighting} />
       })
     } else {
-      return <div> Loading </div>
+      return <Loading />
     }
-    console.log(this.state)
     return (
       <table className="table">
         <thead className="thead-dark">
