@@ -231,7 +231,7 @@ export class AddSightingComponent extends React.Component {
               showTimeSelect
               timeFormat="HH:mm"
               timeIntervals={15}
-              dateFormat="LLL"
+              dateFormat="YYYY/MM/DD HH:mm"
               className="form-control"
               maxDate={moment()}
             />

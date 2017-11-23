@@ -112,7 +112,7 @@ test('Should reset error state to default', () => {
   expect(sightings(errorState, { type: RESETSIGHTINGS })).toEqual({
     fetching: false,
     fetched: false,
-    error: undefineda,
+    error: undefined,
     sightings: []
   })
 })
