@@ -4,8 +4,8 @@ Shows errors when fetching sightings/species, errors are gotten from store.
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { RESETSIGHTINGS } from '../redux/constants/sightings'
-import { RESETSPECIES } from '../redux/constants/species'
+import { RESET_SIGHTINGS } from '../redux/constants/sightings'
+import { RESET_SPECIES } from '../redux/constants/species'
 
 const mapStateToProps = store => {
   return {
@@ -17,10 +17,10 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
   return {
     resetSightings: (species, dateTime, description, count) => {
-      dispatch({ type: RESETSIGHTINGS })
+      dispatch({ type: RESET_SIGHTINGS })
     },
     resetSpecies: () => {
-      dispatch({ type: RESETSPECIES })
+      dispatch({ type: RESET_SPECIES })
     }
   }
 }

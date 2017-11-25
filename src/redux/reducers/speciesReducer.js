@@ -1,4 +1,11 @@
-import { GETALL, SETERROR, FETCHED, FETCHING, SETSPECIES, RESETSPECIES } from '../constants/species'
+import {
+  GETALL,
+  SET_ERROR,
+  FETCHED,
+  FETCHING,
+  SET_SPECIES,
+  RESET_SPECIES
+} from '../constants/species'
 
 const initialState = {
   fetching: false,
@@ -9,14 +16,14 @@ const initialState = {
 
 const species = (state = initialState, action) => {
   switch (action.type) {
-    case SETSPECIES: {
+    case SET_SPECIES: {
       return {
         species: action.payload.species,
         fetched: true,
         fetching: false
       }
     }
-    case SETERROR: {
+    case SET_ERROR: {
       return {
         ...state,
         error: action.payload.error
@@ -36,7 +43,7 @@ const species = (state = initialState, action) => {
         fetched: true
       }
     }
-    case RESETSPECIES: {
+    case RESET_SPECIES: {
       return {
         ...state,
         error: undefined

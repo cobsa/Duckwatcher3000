@@ -1,10 +1,15 @@
 import * as actions from '../../redux/actions/sightingsActions'
 import { access } from 'fs'
-import { UPDATEALL, SIGHTINGS, ERROR, ADDSIGHTING } from '../../redux/constants/sightings'
+import {
+  UPDATE_ALL_SIGHTINGS,
+  SIGHTINGS,
+  ERROR,
+  ADD_SIGHTING
+} from '../../redux/constants/sightings'
 
-test('Should start updating all by sending UPDATEALL', () => {
+test('Should start updating all by sending UPDATE_ALL_SIGHTINGS', () => {
   expect(actions.updateAll()).toEqual({
-    type: UPDATEALL
+    type: UPDATE_ALL_SIGHTINGS
   })
 })
 
@@ -41,7 +46,7 @@ test('Should create action to add sighting', () => {
       exampleSighting.count
     )
   ).toEqual({
-    type: ADDSIGHTING,
+    type: ADD_SIGHTING,
     payload: {
       species: exampleSighting.species,
       dateTime: exampleSighting.dateTime,

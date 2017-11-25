@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 // Custom packages
 
-import { UPDATEALL } from '../redux/constants/sightings'
+import { UPDATE_ALL_SIGHTINGS } from '../redux/constants/sightings'
 import sortBy from '../components/sortBy'
 import Header from '../components/table/header'
 import Sighting from '../components/table/row'
@@ -20,7 +20,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     updateAll: () => {
-      dispatch({ type: UPDATEALL })
+      dispatch({ type: UPDATE_ALL_SIGHTINGS })
     }
   }
 }

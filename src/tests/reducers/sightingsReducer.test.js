@@ -5,7 +5,7 @@ import {
   FETCHED,
   ERROR,
   SIGHTINGS,
-  RESETSIGHTINGS
+  RESET_SIGHTINGS
 } from '../../redux/constants/sightings'
 
 const initialState = {
@@ -109,7 +109,7 @@ test('Should reset error state to default', () => {
     error: 'Some error',
     sightings: []
   }
-  expect(sightings(errorState, { type: RESETSIGHTINGS })).toEqual({
+  expect(sightings(errorState, { type: RESET_SIGHTINGS })).toEqual({
     fetching: false,
     fetched: false,
     error: undefined,

@@ -1,8 +1,8 @@
-import { UPDATEALL, SIGHTINGS, ERROR, ADDSIGHTING } from '../constants/sightings'
+import { UPDATE_ALL_SIGHTINGS, SIGHTINGS, ERROR, ADD_SIGHTING } from '../constants/sightings'
 
 export const updateAll = () => {
   return {
-    type: UPDATEALL
+    type: UPDATE_ALL_SIGHTINGS
   }
 }
 
@@ -26,7 +26,7 @@ export const setError = error => {
 
 export const addSightingAction = (species, dateTime, description, count) => {
   return {
-    type: ADDSIGHTING,
+    type: ADD_SIGHTING,
     payload: {
       species,
       dateTime,

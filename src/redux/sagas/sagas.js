@@ -47,15 +47,15 @@ export function* addSighting(action) {
 
 // Watcher sagas
 export function* watchSightings() {
-  yield takeEvery(sightingConstants.UPDATEALL, updateSightings)
+  yield takeEvery(sightingConstants.UPDATE_ALL_SIGHTINGS, updateSightings)
 }
 
 export function* watchSpecies() {
-  yield takeEvery(speciesConstants.GETSPECIES, updateSpecies)
+  yield takeEvery(speciesConstants.GET_SPECIES, updateSpecies)
 }
 
 export function* watchAddingSightings() {
-  yield takeEvery(sightingConstants.ADDSIGHTING, addSighting)
+  yield takeEvery(sightingConstants.ADD_SIGHTING, addSighting)
 }
 
 export default function* rootSaga() {
