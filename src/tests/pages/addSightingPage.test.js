@@ -11,9 +11,11 @@ import DatePicker from 'react-datepicker'
 import moment from 'moment'
 // Individual test imports
 import { Redirect } from 'react-router-dom'
-
+// Custom components
 import { AddSightingComponent } from '../../pages/addSighting'
 import Loading from '../../components/loading'
+import TextInput from '../../components/form/textInput'
+import SelectInput from '../../components/form/selectInput'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -61,4 +63,66 @@ test('Should render Redirect component', () => {
     redirect: true
   })
   expect(page.find(Redirect).length).toEqual(1)
+})
+
+test('Should send valid user input data to addSighting method', () => {
+  let initialSpeciesData = {
+    fetching: false,
+    fetched: true,
+    error: undefined,
+    species: [
+      {
+        name: 'mallard'
+      },
+      {
+        name: 'redhead'
+      },
+      {
+        name: 'gadwall'
+      },
+      {
+        name: 'canvasback'
+      },
+      {
+        name: 'lesser scaup'
+      }
+    ]
+  }
+  // Create and attach Spy to addSighting function
+  const addSightingSpy = sinon.spy()
+  const page = shallow(
+    <AddSightingComponent
+      species={initialSpeciesData}
+      getSpecies={sinon.spy()}
+      addSighting={addSightingSpy}
+    />
+  )
+  const textInputs = page.find(TextInput)
+  const countInput = textInputs.find({ name: 'Count' })
+  // Hack because .simulate('change') doesn't work
+  countInput.props().onChange({ target: { value: 10 }, preventDefault: sinon.spy() })
+  expect(page.state().count.valid).toBeTruthy()
+  const descriptionInput = textInputs.find({ name: 'Description' })
+  // Hack because .simulate('change') doesn't work
+  descriptionInput
+    .props()
+    .onChange({ target: { value: 'Some description' }, preventDefault: sinon.spy() })
+  expect(page.state().description.valid).toBeTruthy()
+  const speciesInput = page.find(SelectInput)
+
+  // Hack because .simulate('change') doesn't work
+  speciesInput.props().onChange({ target: { value: 'gadwall' }, preventDefault: sinon.spy() })
+  expect(page.state().species.valid).toBeTruthy()
+  // Set dateTime to be fixed instead of now
+  page.setState({
+    dateTime: moment('2016-12-12T23:10:00')
+  })
+
+  // Handle submit
+  page
+    .find('form')
+    .props()
+    .onSubmit({ preventDefault: sinon.spy() })
+  expect(addSightingSpy.calledOnce).toBeTruthy()
+  expect(addSightingSpy.args).toEqual([['gadwall', '2016-12-12T23:10:00Z', 'Some description', 10]])
 })

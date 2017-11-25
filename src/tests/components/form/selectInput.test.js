@@ -4,8 +4,9 @@ import raf from '../../../../__mocks__/raf'
 
 import React from 'react'
 import Enzyme from 'enzyme'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
+import sinon from 'sinon'
 
 import SelectInput from '../../../components/form/selectInput'
 
@@ -26,4 +27,11 @@ test('Valid class name when valid is true', () => {
   const input = shallow(<SelectInput valid={true} />)
   expect(input.find('select').hasClass('form-control')).toEqual(true)
   expect(input.find('select').hasClass('is-valid')).toEqual(true)
+})
+
+test('Trigger onChange method', () => {
+  const onChangeSpy = sinon.spy()
+  const input = mount(<SelectInput onChange={onChangeSpy} />)
+  input.props().onChange()
+  expect(onChangeSpy.called).toBeTruthy()
 })

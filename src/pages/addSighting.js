@@ -164,7 +164,7 @@ export class AddSightingComponent extends React.Component {
     event.preventDefault()
     // Convert date to iso 8601
     // Z means timezone which shouldn't be in program according to assignment
-    let date = this.state.dateTime.format('YYYY:MM:DDTHH:mm:ss') + 'Z'
+    let date = this.state.dateTime.format('YYYY-MM-DDTHH:mm:ss') + 'Z'
     if (this.validateInputs()) {
       this.props.addSighting(
         this.state.species.value,
