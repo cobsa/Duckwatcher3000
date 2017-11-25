@@ -75,6 +75,32 @@ test('Should order by name and from Z to A', () => {
 
 test('Should return same array', () => {
   expect(
+    sortBy(
+      [
+        {
+          count: 1,
+          name: 'I am first'
+        },
+        {
+          count: 1,
+          name: 'I am second'
+        }
+      ],
+      'count'
+    )
+  ).toEqual([
+    {
+      count: 1,
+      name: 'I am first'
+    },
+    {
+      count: 1,
+      name: 'I am second'
+    }
+  ])
+})
+test('Should return same array if orderBy is not defined', () => {
+  expect(
     sortBy([
       {
         count: 1,
