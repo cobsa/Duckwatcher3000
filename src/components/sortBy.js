@@ -3,10 +3,19 @@ Default sorting ascending */
 
 const sortBy = (array, orderBy, descending = false) => {
   function compare(a, b) {
-    if (a[orderBy] < b[orderBy]) {
+    let aToOrder = a[orderBy]
+    let bToOrder = b[orderBy]
+    if (aToOrder == undefined || bToOrder == undefined) {
+      return array
+    }
+    if (typeof aToOrder === 'string' && typeof bToOrder === 'string') {
+      aToOrder = aToOrder.toLowerCase()
+      bToOrder = bToOrder.toLowerCase()
+    }
+    if (aToOrder < bToOrder) {
       return -1
     }
-    if (a[orderBy] > b[orderBy]) {
+    if (aToOrder > bToOrder) {
       return 1
     }
     return 0

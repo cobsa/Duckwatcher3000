@@ -7,7 +7,7 @@ let arrayToSort
 beforeEach(() => {
   arrayToSort = [
     {
-      name: 'CCC',
+      name: 'ccc',
       count: 5
     },
     {
@@ -28,7 +28,7 @@ test('Should order by name', () => {
       count: 120
     },
     {
-      name: 'CCC',
+      name: 'ccc',
       count: 5
     },
     {
@@ -46,7 +46,7 @@ test('Should order by count', () => {
     },
 
     {
-      name: 'CCC',
+      name: 'ccc',
       count: 5
     },
     {
@@ -63,7 +63,7 @@ test('Should order by name and from Z to A', () => {
       count: 1
     },
     {
-      name: 'CCC',
+      name: 'ccc',
       count: 5
     },
     {
