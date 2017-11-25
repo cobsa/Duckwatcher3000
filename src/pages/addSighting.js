@@ -82,7 +82,6 @@ export class AddSightingComponent extends React.Component {
     e.preventDefault()
     // Check if value is null
     if (e.target.value != '') {
-      console.log(e.target.value)
       const value = parseInt(e.target.value)
       let valid = false
       if (value > 0) {
@@ -164,7 +163,7 @@ export class AddSightingComponent extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     // Convert date to iso 8601
-    // Z means timezone which shouldn't be in program according to manual
+    // Z means timezone which shouldn't be in program according to assignment
     let date = this.state.dateTime.format('YYYY:MM:DDTHH:mm:ss') + 'Z'
     if (this.validateInputs()) {
       this.props.addSighting(

@@ -1,3 +1,6 @@
+/* 
+Shows errors when fetching sightings/species, errors are gotten from store.
+*/
 import React from 'react'
 import { connect } from 'react-redux'
 
@@ -22,6 +25,8 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
+// Show sightings/species erros
+
 export class ShowErrorComponent extends React.Component {
   render() {
     const { speciesError, sightingsError } = this.props
@@ -33,6 +38,8 @@ export class ShowErrorComponent extends React.Component {
     return <div className="errorList">{errorsList}</div>
   }
 }
+
+// Individual error component
 
 export class Error extends React.Component {
   render() {

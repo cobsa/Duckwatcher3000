@@ -1,4 +1,4 @@
-/* Component that renders drop down selection input */
+/* Component that renders text selection input */
 
 import React from 'react'
 
