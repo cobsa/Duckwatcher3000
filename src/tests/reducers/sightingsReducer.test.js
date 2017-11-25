@@ -1,15 +1,13 @@
 import sightings from '../../redux/reducers/sightingsReducer'
 
 import {
-  FETCHING,
-  FETCHED,
-  ERROR,
+  FETCHED_SIGHTINGS,
+  ERROR_SIGHTINGS,
   SIGHTINGS,
   RESET_SIGHTINGS
 } from '../../redux/constants/sightings'
 
 const initialState = {
-  fetching: false,
   fetched: false,
   error: undefined,
   sightings: []
@@ -35,7 +33,6 @@ test('Should update all sightings', () => {
       }
     })
   ).toEqual({
-    fetching: false,
     fetched: true,
     error: undefined,
     sightings: [
@@ -49,36 +46,8 @@ test('Should update all sightings', () => {
   })
 })
 
-test('Should switch state to fetching', () => {
-  expect(sightings(undefined, { type: FETCHING })).toEqual({
-    fetching: true,
-    fetched: false,
-    error: undefined,
-    sightings: []
-  })
-})
-
-test('Should switch state to fetching and set fetched and error to initial state', () => {
-  expect(
-    sightings(
-      {
-        fetching: false,
-        fetched: true,
-        error: 'Some error',
-        sightings: []
-      },
-      { type: FETCHING }
-    )
-  ).toEqual({
-    fetching: true,
-    fetched: false,
-    error: undefined,
-    sightings: []
-  })
-})
-
 test('Should switch state to fetched', () => {
-  expect(sightings(undefined, { type: FETCHED })).toEqual({
+  expect(sightings(undefined, { type: FETCHED_SIGHTINGS })).toEqual({
     fetching: false,
     fetched: true,
     error: undefined,
@@ -89,7 +58,7 @@ test('Should switch state to fetched', () => {
 test('Should set error state', () => {
   expect(
     sightings(undefined, {
-      type: ERROR,
+      type: ERROR_SIGHTINGS,
       payload: {
         error: 'Some error'
       }

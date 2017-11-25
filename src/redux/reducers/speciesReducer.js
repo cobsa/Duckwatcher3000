@@ -1,8 +1,8 @@
 import {
   GETALL,
   SET_ERROR,
-  FETCHED,
-  FETCHING,
+  FETCHED_SPECIES,
+  FETCHING_SPECIES,
   SET_SPECIES,
   RESET_SPECIES
 } from '../constants/species'
@@ -29,14 +29,14 @@ const species = (state = initialState, action) => {
         error: action.payload.error
       }
     }
-    case FETCHING: {
+    case FETCHING_SPECIES: {
       return {
         ...state,
         fetching: true,
         fetched: false
       }
     }
-    case FETCHED: {
+    case FETCHED_SPECIES: {
       return {
         ...state,
         fetching: false,

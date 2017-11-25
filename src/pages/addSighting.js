@@ -7,8 +7,7 @@ import { Redirect } from 'react-router-dom'
 
 import 'react-datepicker/dist/react-datepicker.css'
 import { addSightingAction } from '../redux/actions/sightingsActions'
-import { GET_SPECIES } from '../redux/constants/species'
-import { FETCHED } from '../redux/constants/sightings'
+import { getSpecies } from '../redux/actions/speciesActions'
 
 import TextInput from '../components/form/textInput'
 import SelectInput from '../components/form/selectInput'
@@ -27,7 +26,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(addSightingAction(species, dateTime, description, count))
     },
     getSpecies: () => {
-      dispatch({ type: GET_SPECIES })
+      dispatch(getSpecies())
     }
   }
 }

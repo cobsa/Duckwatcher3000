@@ -3,7 +3,7 @@ import { access } from 'fs'
 import {
   UPDATE_ALL_SIGHTINGS,
   SIGHTINGS,
-  ERROR,
+  ERROR_SIGHTINGS,
   ADD_SIGHTING
 } from '../../redux/constants/sightings'
 
@@ -18,15 +18,6 @@ test('Should create action replace sightings in store', () => {
     type: SIGHTINGS,
     payload: {
       sightings: []
-    }
-  })
-})
-
-test('Should create action to set error state', () => {
-  expect(actions.setError('Some error')).toEqual({
-    type: ERROR,
-    payload: {
-      error: 'Some error'
     }
   })
 })

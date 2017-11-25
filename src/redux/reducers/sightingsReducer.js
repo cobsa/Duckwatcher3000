@@ -1,4 +1,10 @@
-import { SIGHTINGS, FETCHING, FETCHED, ERROR, RESET_SIGHTINGS } from '../constants/sightings'
+import {
+  SIGHTINGS,
+  FETCHING,
+  FETCHED_SIGHTINGS,
+  ERROR_SIGHTINGS,
+  RESET_SIGHTINGS
+} from '../constants/sightings'
 
 /* 
     State layout:
@@ -18,7 +24,6 @@ import { SIGHTINGS, FETCHING, FETCHED, ERROR, RESET_SIGHTINGS } from '../constan
 */
 
 let initialState = {
-  fetching: false,
   fetched: false,
   error: undefined,
   sightings: []
@@ -33,15 +38,7 @@ const sightings = (state = initialState, action) => {
         fetched: true,
         sightings: action.payload.sightings
       }
-    case FETCHING: {
-      return {
-        ...state,
-        fetching: true,
-        fetched: false,
-        error: undefined
-      }
-    }
-    case FETCHED: {
+    case FETCHED_SIGHTINGS: {
       return {
         ...state,
         fetched: true,
@@ -49,7 +46,7 @@ const sightings = (state = initialState, action) => {
         error: undefined
       }
     }
-    case ERROR: {
+    case ERROR_SIGHTINGS: {
       return {
         ...state,
         fetched: false,

@@ -11,7 +11,6 @@ import backend from '../constants/backend'
 
 // Worker sagas
 export function* updateSightings() {
-  yield put({ type: sightingConstants.FETCHING })
   // Make axios call to get all sightings
   try {
     const response = yield call(axios, backend + '/sightings')
@@ -22,7 +21,6 @@ export function* updateSightings() {
 }
 
 export function* updateSpecies() {
-  yield put({ type: speciesConstants.FETCHING })
   try {
     const response = yield call(axios, backend + '/species')
     yield put(speciesActions.setSpecies(response.data))
