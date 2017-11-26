@@ -6,9 +6,9 @@ export default class Navbar extends React.Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a className="navbar-brand" href="#">
-          DuckWatcher 3000
-        </a>
+        <Link className="navbar-brand" to="/">
+          Sightings
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
