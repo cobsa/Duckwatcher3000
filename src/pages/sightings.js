@@ -55,9 +55,9 @@ class SightingsComponent extends React.Component {
     const { sightings, fetched } = this.props.sightings
     let listOfSightings
     // Sort list
-    sortBy(sightings, this.state.orderBy, this.state.reverseOrder)
+    let sortedSightings = sortBy(sightings, this.state.orderBy, this.state.reverseOrder)
     if (fetched) {
-      listOfSightings = sightings.map(sighting => {
+      listOfSightings = sortedSightings.map(sighting => {
         return <Sighting key={sighting.id} {...sighting} />
       })
     } else {

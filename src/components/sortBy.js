@@ -1,5 +1,8 @@
-/* Sorts array of objects by "orderBy" attribute.
-Default sorting ascending */
+/* Sorts array of objects by "orderBy" attribute, returns new copy of array.
+Default sorting is ascending */
+
+// NOTE: might be issues with chrome. TODO: RECHECK
+
 
 const sortBy = (array, orderBy, descending = false) => {
   function compare(a, b) {
@@ -20,11 +23,12 @@ const sortBy = (array, orderBy, descending = false) => {
     }
     return 0
   }
+  const sortedArray = array.slice() // Copy array
+  sortedArray.sort(compare)
   if (descending) {
-    array.sort(compare)
-    return array.reverse()
+    return sortedArray.reverse()
   } else {
-    return array.sort(compare)
+    return sortedArray
   }
 }
 
