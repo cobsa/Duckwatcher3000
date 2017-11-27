@@ -104,21 +104,12 @@ export class AddSightingComponent extends React.Component {
         return true
       }
     })
-    if (valid) {
-      this.setState({
-        species: {
-          value,
-          valid: true
-        }
-      })
-    } else {
-      this.setState({
-        species: {
-          value,
-          valid: false
-        }
-      })
-    }
+    this.setState({
+      species: {
+        value,
+        valid: valid
+      }
+    })
   }
 
   handleDateTimeChange(date) {
@@ -162,8 +153,8 @@ export class AddSightingComponent extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     // Convert date to iso 8601
-    // Z means timezone which shouldn't be in program according to assignment
-    let date = this.state.dateTime.format('YYYY-MM-DDTHH:mm:ss') + 'Z'
+    // Z means that timezone is in UTC+0 which shouldn't be in program according to assignment
+    let date = this.state.dateTime.format('YYYY-MM-DDTHH:mm:ss')
     if (this.validateInputs()) {
       this.props.addSighting(
         this.state.species.value,

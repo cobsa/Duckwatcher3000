@@ -25,7 +25,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-// Show sightings/species erros
+// Show sightings/species errors
 
 export class ShowErrorComponent extends React.Component {
   render() {

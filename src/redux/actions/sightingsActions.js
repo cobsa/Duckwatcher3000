@@ -1,4 +1,9 @@
-import { UPDATE_ALL_SIGHTINGS, SIGHTINGS, ERROR_SIGHTINGS, ADD_SIGHTING } from '../constants/sightings'
+import {
+  UPDATE_ALL_SIGHTINGS,
+  SIGHTINGS,
+  ERROR_SIGHTINGS,
+  ADD_SIGHTING
+} from '../constants/sightings'
 
 export const updateAll = () => {
   return {
