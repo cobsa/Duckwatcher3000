@@ -32,7 +32,7 @@ let initialState = {
 const sightings = (state = initialState, action) => {
   switch (action.type) {
     case SIGHTINGS:
-      // Replaces state
+      // Replaces sightings
       return {
         ...state,
         fetched: true,

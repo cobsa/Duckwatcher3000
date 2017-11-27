@@ -1,16 +1,16 @@
 /* Page where user can add new sighting. Takes care of user input validation */
 import React from 'react'
-import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import 'react-datepicker/dist/react-datepicker.css'
+import 'react-datetime/css/react-datetime.css'
 import { addSightingAction } from '../redux/actions/sightingsActions'
 import { getSpecies } from '../redux/actions/speciesActions'
 
 import TextInput from '../components/form/textInput'
 import SelectInput from '../components/form/selectInput'
+import DatePicker from '../components/form/dateTimePicker'
 import Loading from '../components/loading'
 
 // Connect to store
@@ -41,7 +41,10 @@ export class AddSightingComponent extends React.Component {
     this.handleSpecies = this.handleSpecies.bind(this)
     this.validateInputs = this.validateInputs.bind(this)
     this.state = {
-      dateTime: moment().startOf('hour'),
+      dateTime: {
+        value: undefined,
+        valid: undefined
+      },
       species: {
         value: '',
         valid: undefined
@@ -96,7 +99,6 @@ export class AddSightingComponent extends React.Component {
   }
 
   handleSpecies(e) {
-    // TODO: Find way to clean code?
     const { value } = e.target
     const { species } = this.props.species
     const valid = species.find(duck => {
@@ -113,12 +115,16 @@ export class AddSightingComponent extends React.Component {
   }
 
   handleDateTimeChange(date) {
+    let valid = date.isBefore(moment())
     this.setState({
-      dateTime: date
+      dateTime: {
+        value: date,
+        valid
+      }
     })
   }
   validateInputs() {
-    // Check that all inputs are valid
+    // Check that all inputs are valid marks inputs false if user had not inputted any thing
     let allValid = true
     if (!this.state.count.valid) {
       this.setState({
@@ -147,22 +153,30 @@ export class AddSightingComponent extends React.Component {
       })
       allValid = false
     }
+    if (!this.state.dateTime.valid) {
+      this.setState({
+        dateTime: {
+          ...this.state.dateTime,
+          valid: false
+        }
+      })
+      allValid = false
+    }
     return allValid
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    // Convert date to iso 8601
-    // Z means that timezone is in UTC+0 which shouldn't be in program according to assignment
-    let date = this.state.dateTime.format('YYYY-MM-DDTHH:mm:ss')
     if (this.validateInputs()) {
+      // Convert date to iso 8601
+      let date = this.state.dateTime.value.utc().format('YYYY-MM-DD[T]HH:mm:ss[Z]') // To add UTC timezone to dateTime string
       this.props.addSighting(
         this.state.species.value,
         date,
         this.state.description.value,
         this.state.count.value
       )
-      // Redirect and show confirmation?
+      // Redirect
       this.setState({
         redirect: true
       })
@@ -180,7 +194,6 @@ export class AddSightingComponent extends React.Component {
         // Redirect if adding successful
         return <Redirect to="/" />
       }
-
       return (
         <form onSubmit={this.handleSubmit} noValidate>
           <SelectInput
@@ -212,19 +225,11 @@ export class AddSightingComponent extends React.Component {
             onChange={this.handleDescription}
             valid={this.state.description.valid}
           />
-          <div className="form-group">
-            <label htmlFor="inputDateTime">Time</label>
-            <DatePicker
-              selected={this.state.dateTime}
-              onChange={this.handleDateTimeChange}
-              showTimeSelect
-              timeFormat="HH:mm"
-              timeIntervals={15}
-              dateFormat="YYYY/MM/DD HH:mm"
-              className="form-control"
-              maxDate={moment()}
-            />
-          </div>
+          <DatePicker
+            value={this.state.dateTime.value}
+            valid={this.state.dateTime.valid}
+            handleDateTimeChange={this.handleDateTimeChange}
+          />
           <button type="submit" className="btn btn-primary">
             Submit sighting
           </button>

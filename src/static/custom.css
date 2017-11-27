@@ -1,21 +1,11 @@
 .content {
   margin-top: 1em;
 }
-/* Overriding datepicker css stylings*/
-.react-datepicker__input-container {
-  display: block !important;
-}
-.react-datepicker-wrapper {
-  display: block !important;
-}
-.react-datepicker__time-container {
-  min-width: 150px;
-}
-.react-datepicker__time-box {
-  min-width: 150px;
-}
-.react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
-  right: 150px !important;
+/* Overriding DateTime css stylings*/
+
+.rdt {
+  border: none !important;
+  padding: 0 !important;
 }
 
 /* Icon styling*/
@@ -43,14 +33,14 @@
   color: red;
 }
 
-
 /* Loading spinner*/
 
-
 @keyframes spinner {
-  to {transform: rotate(360deg);}
+  to {
+    transform: rotate(360deg);
+  }
 }
- 
+
 .spinner:before {
   content: '';
   box-sizing: border-box;
@@ -65,5 +55,5 @@
   border: 2px solid transparent;
   border-top-color: #07d;
   border-bottom-color: #07d;
-  animation: spinner .8s ease infinite;
+  animation: spinner 0.8s ease infinite;
 }
