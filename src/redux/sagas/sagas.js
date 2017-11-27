@@ -1,5 +1,6 @@
 import { put, takeEvery, all, call } from 'redux-saga/effects'
 import axios from 'axios'
+import Alert from 'react-s-alert'
 
 // Sighting reducer
 import * as sightingConstants from '../constants/sightings'
@@ -38,6 +39,12 @@ export function* addSighting(action) {
       count: action.payload.count
     })
     yield put(sightingActions.updateAll())
+    // Notify user that sighting has been added
+    Alert.success('Sighting added successfully', {
+      position: 'bottom',
+      effect: 'scale',
+      timeout: 4000
+    })
   } catch (e) {
     yield put(sightingActions.setError(e.message))
   }

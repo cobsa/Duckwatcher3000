@@ -9,6 +9,11 @@ import { createBrowserHistory } from 'history'
 import { Route } from 'react-router'
 import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap'
 import createSageMiddleware from 'redux-saga'
+import Alert from 'react-s-alert'
+// Import Alert css files
+import 'react-s-alert/dist/s-alert-default.css'
+import 'react-s-alert/dist/s-alert-css-effects/scale.css'
+
 // Custom packages
 import Sightings from './pages/sightings'
 import AddSighting from './pages/addSighting'
@@ -38,6 +43,7 @@ ReactDom.render(
           <Route exact path="/" component={Sightings} />
           <Route path="/addSighting" component={AddSighting} />
         </div>
+        <Alert stack={{ limit: 1 }} />
       </div>
     </ConnectedRouter>
   </Provider>,
