@@ -10,10 +10,13 @@
 
 /* Icon styling*/
 .sortButtons {
+  display:flex;
+  direction: row;
 }
 
 /* Remove button styling*/
 .sortButton {
+  display:flex;
   line-height: 1;
   background: none !important;
   color: inherit;

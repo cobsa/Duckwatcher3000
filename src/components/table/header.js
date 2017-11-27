@@ -28,10 +28,10 @@ export default class Header extends React.Component {
       <th className="headerWithIcons" scope="col">
         <button className="sortButton" onClick={this.handleClick}>
           {this.props.name}
-          <span className="sortButtons">
+          <div className="sortButtons">
             <i className={upStyle}>arrow_upward</i>
             <i className={downStyle}>arrow_downward</i>
-          </span>
+          </div>
         </button>
       </th>
     )
