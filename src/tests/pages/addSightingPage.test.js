@@ -7,7 +7,7 @@ import Enzyme from 'enzyme'
 import { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import sinon from 'sinon'
-import DatePicker from 'react-datepicker'
+
 import moment from 'moment'
 // Individual test imports
 import { Redirect } from 'react-router-dom'
@@ -16,6 +16,7 @@ import { AddSightingComponent } from '../../pages/addSighting'
 import Loading from '../../components/loading'
 import TextInput from '../../components/form/textInput'
 import SelectInput from '../../components/form/selectInput'
+import DatePicker from '../../components/form/dateTimePicker'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -113,16 +114,25 @@ test('Should send valid user input data to addSighting method', () => {
   // Hack because .simulate('change') doesn't work
   speciesInput.props().onChange({ target: { value: 'gadwall' }, preventDefault: sinon.spy() })
   expect(page.state().species.valid).toBeTruthy()
-  // Set dateTime to be fixed instead of now
-  page.setState({
-    dateTime: moment('2016-12-12T23:10:00')
-  })
 
+  // Test dateTime and use fixed date instead of now
+  const datePicker = page.find(DatePicker)
+  datePicker.props().handleDateTimeChange(moment('2016-12-12T23:10:00')) // Manually trigger onBlur
+  expect(page.state().dateTime.valid).toBeTruthy()
   // Handle submit
   page
     .find('form')
     .props()
     .onSubmit({ preventDefault: sinon.spy() })
   expect(addSightingSpy.calledOnce).toBeTruthy()
-  expect(addSightingSpy.args).toEqual([['gadwall', '2016-12-12T23:10:00Z', 'Some description', 10]])
+  expect(addSightingSpy.args).toEqual([
+    [
+      'gadwall',
+      moment('2016-12-12T23:10:00')
+        .utc()
+        .format('YYYY-MM-DDTHH:mm:ss') + 'Z',
+      'Some description',
+      10
+    ]
+  ])
 })

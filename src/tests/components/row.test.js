@@ -6,6 +6,7 @@ import React from 'react'
 import Enzyme from 'enzyme'
 import { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
+import moment from 'moment'
 
 import Sighting from '../../components/table/row'
 
@@ -44,5 +45,5 @@ test('Sighting renders props correctly', () => {
       .find('th')
       .first()
       .text()
-  ).toBe('24/12/2016 13:12:00')
+  ).toBe(moment(props.dateTime).format('DD/MM/YYYY HH:mm:ss')) // Shows time in local time
 })
