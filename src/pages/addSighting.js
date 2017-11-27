@@ -16,7 +16,8 @@ import Loading from '../components/loading'
 // Connect to store
 const mapStateToProps = store => {
   return {
-    species: store.species
+    species: store.species,
+    location: store.router.location
   }
 }
 
@@ -65,6 +66,16 @@ export class AddSightingComponent extends React.Component {
     this.props.getSpecies()
   }
 
+  componentWillReceiveProps(nextProps) {
+    // Will force update all when link to sightings is clicked again
+    // TODO: Might not be good way?
+    if (
+      nextProps.location.pathname === this.props.location.pathname &&
+      nextProps.location.key !== this.props.location.key
+    ) {
+      this.props.getSpecies()
+    }
+  }
   handleDescription(e) {
     e.preventDefault()
     const { value } = e.target

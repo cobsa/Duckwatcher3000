@@ -36,6 +36,7 @@ const sightings = (state = initialState, action) => {
       return {
         ...state,
         fetched: true,
+        error: undefined,
         sightings: action.payload.sightings
       }
     case FETCHED_SIGHTINGS: {

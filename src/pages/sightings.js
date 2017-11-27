@@ -13,7 +13,8 @@ import Loading from '../components/loading'
 
 const mapStateToProps = state => {
   return {
-    sightings: state.sightings
+    sightings: state.sightings,
+    location: state.router.location
   }
 }
 
@@ -51,12 +52,21 @@ class SightingsComponent extends React.Component {
   componentDidMount() {
     this.props.updateAll()
   }
+  componentWillReceiveProps(nextProps) {
+    // Will force update all when link to sightings is clicked again
+    // TODO: Might not be good way?
+    if (
+      nextProps.location.pathname === this.props.location.pathname &&
+      nextProps.location.key !== this.props.location.key
+    ) {
+      this.props.updateAll()
+    }
+  }
   render() {
     const { sightings, fetched } = this.props.sightings
     let listOfSightings
     // Sort list
     let sortedSightings = sortBy(sightings, this.state.orderBy, this.state.reverseOrder)
-    // Not fastest option since list is sorted every time the page renders
     if (fetched) {
       listOfSightings = sortedSightings.map(sighting => {
         return <Sighting key={sighting.id} {...sighting} />

@@ -20,7 +20,8 @@ const species = (state = initialState, action) => {
       return {
         species: action.payload.species,
         fetched: true,
-        fetching: false
+        fetching: false,
+        error: undefined
       }
     }
     case SET_ERROR: {
