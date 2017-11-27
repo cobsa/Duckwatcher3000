@@ -30,8 +30,8 @@ class SightingsComponent extends React.Component {
   constructor() {
     super()
     this.state = {
-      orderBy: undefined,
-      reverseOrder: false
+      orderBy: 'dateTime', // Initial order
+      reverseOrder: true
     }
     this.handleSort = this.handleSort.bind(this)
   }
@@ -56,6 +56,7 @@ class SightingsComponent extends React.Component {
     let listOfSightings
     // Sort list
     let sortedSightings = sortBy(sightings, this.state.orderBy, this.state.reverseOrder)
+    // Not fastest option since list is sorted every time the page renders
     if (fetched) {
       listOfSightings = sortedSightings.map(sighting => {
         return <Sighting key={sighting.id} {...sighting} />
@@ -67,15 +68,15 @@ class SightingsComponent extends React.Component {
       <table className="table">
         <thead className="thead-dark">
           <tr>
-            <Header {...this.state} name="Species" type="species" onClick={this.handleSort} />
+            <Header {...this.state} name="DateTime" type="dateTime" onClick={this.handleSort} />
             <Header
               {...this.state}
               name="Description"
               type="description"
               onClick={this.handleSort}
             />
+            <Header {...this.state} name="Species" type="species" onClick={this.handleSort} />
             <Header {...this.state} name="Count" type="count" onClick={this.handleSort} />
-            <Header {...this.state} name="DateTime" type="dateTime" onClick={this.handleSort} />
           </tr>
         </thead>
         <tbody>{listOfSightings}</tbody>

@@ -15,7 +15,7 @@ const props = {
   species: 'Mallard',
   description: 'Lorem ipsum',
   count: 5,
-  dateTime: '2016-12-12T10:10:00Z'
+  dateTime: '2016-12-24T13:12:00Z'
 }
 
 test('Sighting renders props correctly', () => {
@@ -24,7 +24,7 @@ test('Sighting renders props correctly', () => {
   expect(
     sighting
       .find('th')
-      .first()
+      .at(2)
       .text()
   ).toBe('Mallard')
   expect(
@@ -36,13 +36,13 @@ test('Sighting renders props correctly', () => {
   expect(
     sighting
       .find('th')
-      .at(2)
+      .at(3)
       .text()
   ).toBe(props.count.toString())
   expect(
     sighting
       .find('th')
-      .at(3)
+      .first()
       .text()
-  ).toBe(props.dateTime)
+  ).toBe('24/12/2016 13:12:00')
 })
