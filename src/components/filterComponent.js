@@ -33,9 +33,17 @@ export class FilterComponent extends React.Component {
     this.handleStartTime = this.handleStartTime.bind(this)
     this.handleEndTime = this.handleEndTime.bind(this)
     this.resetFilters = this.resetFilters.bind(this)
+    this.state = {
+      collapsed: true
+    }
   }
   componentDidMount() {
     this.props.updateSpecies()
+    if (this.props.sightings.filter.column != undefined) {
+      this.setState({
+        collapsed: false
+      }) // WARNING: Potential performance issue
+    }
   }
   validateSpecies(e) {
     const { value } = e.target
@@ -47,7 +55,11 @@ export class FilterComponent extends React.Component {
     })
     if (valid) {
       // Species in list of species
-      this.props.setFilter('species', { filterQuery: value })
+      this.props.setFilter('species', {
+        filterQuery: value,
+        startTime: undefined,
+        endTime: undefined
+      }) // Set other filter arguments to undefined
     } else {
       // Species is not in the list ie. User selected "Choose species"
       this.props.resetFilter()
@@ -57,13 +69,13 @@ export class FilterComponent extends React.Component {
   handleStartTime(startTime) {
     // Check that is moment and not string
     if (startTime instanceof moment) {
-      this.props.setFilter('dateTime', { startTime })
+      this.props.setFilter('dateTime', { startTime, filterQuery: undefined }) // Set other filter arguments to undefined
     }
   }
   handleEndTime(endTime) {
     // Check that is moment and not string
     if (endTime instanceof moment) {
-      this.props.setFilter('dateTime', { endTime })
+      this.props.setFilter('dateTime', { endTime, filterQuery: undefined }) // Set other filter arguments to undefined
     }
   }
   resetFilters(e) {
@@ -72,6 +84,7 @@ export class FilterComponent extends React.Component {
   }
   render() {
     const classes = 'form-control'
+    console.log(this.state)
     if (this.props.species.status.code == 'FETCHED') {
       return (
         <div>
@@ -87,7 +100,7 @@ export class FilterComponent extends React.Component {
               Filter
             </button>
           </p>
-          <div className="collapse" id="filterMenu">
+          <div className={this.state.collapsed ? 'collapse' : 'collapse.show'} id="filterMenu">
             <div className="card card-body">
               <form className="form-inline">
                 <div className="form-group">
