@@ -8,9 +8,20 @@ import {
 
 /* 
     State layout:
-    fetching: true,
-    fetched: false,
-    error: false,
+    status: {
+      code: "ERROR", "FETCHED", 
+      message: "i.e. error message"
+    }
+    order: {
+      column: "species"/"dateTime" etc,
+      direction: "ASCENDING/DESCENDING"
+    }
+    filter: {
+      filterBy: string,
+      filterArguments: {
+        
+      }
+    }
     sightings: [
     {
         "id": int,

@@ -1,3 +1,5 @@
+// Container for react-datetime element
+
 import React from 'react'
 import moment from 'moment'
 import DateTime from 'react-datetime'

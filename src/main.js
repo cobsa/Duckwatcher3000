@@ -9,7 +9,7 @@ import { createBrowserHistory } from 'history'
 import { Route } from 'react-router'
 import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap'
 import createSageMiddleware from 'redux-saga'
-import Alert from 'react-s-alert'
+import Alert from 'react-s-alert' // Module to show alerts
 // Import Alert css files
 import 'react-s-alert/dist/s-alert-default.css'
 import 'react-s-alert/dist/s-alert-css-effects/scale.css'

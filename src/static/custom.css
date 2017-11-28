@@ -36,6 +36,11 @@
   color: red;
 }
 
+.btn-filter {
+  width: 100%;
+  font-size: 1.4em;
+  border-radius: 0;
+}
 /* Loading spinner*/
 
 @keyframes spinner {

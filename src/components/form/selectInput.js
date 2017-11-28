@@ -10,13 +10,20 @@ export default class SelectInput extends React.Component {
     }
 
     let classes = 'form-control ' + valid
+    // Populate drop down selection with duck names
+    let options
+    if (this.props.optionsList) {
+      options = this.props.optionsList.map(specie => {
+        return <option key={specie.name}>{specie.name}</option>
+      })
+    }
 
     return (
       <div className="form-group">
         <label htmlFor={this.props.id}>{this.props.name}</label>
         <select className={classes} id={this.props.id} onChange={this.props.onChange}>
           <option defaultValue>{this.props.defaultValue}</option>
-          {this.props.optionsList}
+          {options}
         </select>
         <div className="invalid-feedback">{this.props.errorMessage}</div>
       </div>

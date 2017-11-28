@@ -197,10 +197,6 @@ export class AddSightingComponent extends React.Component {
   render() {
     const { species, fetched } = this.props.species
     if (fetched) {
-      // Populate drop down selection with duck names
-      const speciesOptions = species.map(specie => {
-        return <option key={specie.name}>{specie.name}</option>
-      })
       if (this.state.redirect) {
         // Redirect if adding successful
         return <Redirect to="/" />
@@ -212,7 +208,7 @@ export class AddSightingComponent extends React.Component {
             id="speciesSelect"
             defaultValue="Select duck species"
             errorMessage="Please select duck species from list"
-            optionsList={speciesOptions}
+            optionsList={species}
             onChange={this.handleSpecies}
             valid={this.state.species.valid}
           />
