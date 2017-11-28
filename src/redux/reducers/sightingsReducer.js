@@ -1,10 +1,4 @@
-import {
-  SIGHTINGS,
-  FETCHING,
-  FETCHED_SIGHTINGS,
-  ERROR_SIGHTINGS,
-  RESET_SIGHTINGS
-} from '../constants/sightings'
+import * as constants from '../constants/sightings'
 
 /* 
     State layout:
@@ -35,41 +29,86 @@ import {
 */
 
 let initialState = {
-  fetched: false,
-  error: undefined,
+  status: {
+    code: 'NOT_FETCHED',
+    message: undefined
+  },
+  order: {
+    column: 'dateTime',
+    direction: 'ASCENDING'
+  },
+  filter: {
+    column: undefined,
+    filterArguments: {
+      filterQuery: undefined,
+      startTime: undefined,
+      endTime: undefined
+    }
+  },
   sightings: []
 }
 
 const sightings = (state = initialState, action) => {
   switch (action.type) {
-    case SIGHTINGS:
-      // Replaces sightings
+    case constants.SET_SIGHTINGS: {
       return {
         ...state,
-        fetched: true,
-        error: undefined,
+        status: {
+          code: 'FETCHED'
+        },
         sightings: action.payload.sightings
       }
-    case FETCHED_SIGHTINGS: {
+    }
+    case constants.SET_ERROR: {
       return {
         ...state,
-        fetched: true,
-        fetching: false,
-        error: undefined
+        status: {
+          code: 'ERROR',
+          message: action.payload.error
+        }
       }
     }
-    case ERROR_SIGHTINGS: {
+    case constants.SET_ORDER: {
       return {
         ...state,
-        fetched: false,
-        fetching: false,
-        error: action.payload.error
+        order: {
+          column: action.payload.column,
+          direction: action.payload.direction
+        }
       }
     }
-    case RESET_SIGHTINGS: {
+    case constants.RESET_ORDER: {
       return {
         ...state,
-        error: undefined
+        order: {
+          column: initialState.order.column,
+          direction: initialState.order.direction
+        }
+      }
+    }
+    case constants.SET_FILTER: {
+      return {
+        ...state,
+        filter: {
+          column: action.payload.column,
+          filterArguments: Object.assign(
+            state.filter.filterArguments,
+            action.payload.filterArguments
+          )
+        }
+      }
+    }
+    case constants.RESET_FILTER: {
+      return {
+        ...state,
+        filter: {
+          column: undefined,
+          filterArguments: {
+            filterQuery: undefined,
+            startTime: undefined,
+            endTime: undefined
+          }
+        }
       }
     }
     default:

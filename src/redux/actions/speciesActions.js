@@ -1,8 +1,7 @@
-import { SET_SPECIES, SET_ERROR, GET_SPECIES } from '../constants/species'
-
+import * as constants from '../constants/species'
 export const setSpecies = species => {
   return {
-    type: SET_SPECIES,
+    type: constants.SET_SPECIES,
     payload: {
       species
     }
@@ -11,7 +10,7 @@ export const setSpecies = species => {
 
 export const setError = error => {
   return {
-    type: SET_ERROR,
+    type: constants.SET_ERROR,
     payload: {
       error
     }
@@ -20,6 +19,6 @@ export const setError = error => {
 
 export const getSpecies = () => {
   return {
-    type: GET_SPECIES
+    type: constants.GET_SPECIES
   }
 }

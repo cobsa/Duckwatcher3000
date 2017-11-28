@@ -1,21 +1,16 @@
 import * as actions from '../../redux/actions/sightingsActions'
 import { access } from 'fs'
-import {
-  UPDATE_ALL_SIGHTINGS,
-  SIGHTINGS,
-  ERROR_SIGHTINGS,
-  ADD_SIGHTING
-} from '../../redux/constants/sightings'
+import * as constants from '../../redux/constants/sightings'
 
 test('Should start updating all by sending UPDATE_ALL_SIGHTINGS', () => {
-  expect(actions.updateAll()).toEqual({
-    type: UPDATE_ALL_SIGHTINGS
+  expect(actions.getSightings()).toEqual({
+    type: constants.GET_SIGHTINGS
   })
 })
 
 test('Should create action replace sightings in store', () => {
   expect(actions.setSightings([])).toEqual({
-    type: SIGHTINGS,
+    type: constants.SET_SIGHTINGS,
     payload: {
       sightings: []
     }
@@ -30,14 +25,14 @@ test('Should create action to add sighting', () => {
     count: 2
   }
   expect(
-    actions.addSightingAction(
+    actions.addSighting(
       exampleSighting.species,
       exampleSighting.dateTime,
       exampleSighting.description,
       exampleSighting.count
     )
   ).toEqual({
-    type: ADD_SIGHTING,
+    type: constants.ADD_SIGHTING,
     payload: {
       species: exampleSighting.species,
       dateTime: exampleSighting.dateTime,

@@ -21,9 +21,10 @@ import DatePicker from '../../components/form/dateTimePicker'
 Enzyme.configure({ adapter: new Adapter() })
 
 let speciesInitial = {
-  fetching: false,
-  fetched: false,
-  error: undefined,
+  status: {
+    code: 'NOT_FETCHED',
+    message: undefined
+  },
   species: []
 }
 
@@ -39,9 +40,10 @@ test('Should render Loading component', () => {
 
 test('Should render normal state ie. not loading component', () => {
   let initialDataLoaded = {
-    fetching: false,
-    fetched: true,
-    error: undefined,
+    status: {
+      code: 'FETCHED',
+      message: undefined
+    },
     species: []
   }
   const page = shallow(
@@ -52,9 +54,10 @@ test('Should render normal state ie. not loading component', () => {
 
 test('Should render Redirect component', () => {
   let initialDataLoaded = {
-    fetching: false,
-    fetched: true,
-    error: undefined,
+    status: {
+      code: 'FETCHED',
+      message: undefined
+    },
     species: []
   }
   const page = shallow(
@@ -68,9 +71,10 @@ test('Should render Redirect component', () => {
 
 test('Should send valid user input data to addSighting method', () => {
   let initialSpeciesData = {
-    fetching: false,
-    fetched: true,
-    error: undefined,
+    status: {
+      code: 'FETCHED',
+      message: undefined
+    },
     species: [
       {
         name: 'mallard'

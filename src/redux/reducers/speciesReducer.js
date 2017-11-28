@@ -1,11 +1,4 @@
-import {
-  GETALL,
-  SET_ERROR,
-  FETCHED_SPECIES,
-  FETCHING_SPECIES,
-  SET_SPECIES,
-  RESET_SPECIES
-} from '../constants/species'
+import * as speciesConstants from '../constants/species'
 
 /* 
     State layout:
@@ -23,46 +16,31 @@ import {
 */
 
 const initialState = {
-  fetching: false,
-  fetched: false,
-  error: undefined,
+  status: {
+    code: 'NOT_FETCHED',
+    message: undefined
+  },
   species: []
 }
 
 const species = (state = initialState, action) => {
   switch (action.type) {
-    case SET_SPECIES: {
-      return {
-        species: action.payload.species,
-        fetched: true,
-        fetching: false,
-        error: undefined
-      }
-    }
-    case SET_ERROR: {
+    case speciesConstants.SET_SPECIES: {
       return {
         ...state,
-        error: action.payload.error
+        status: {
+          code: 'FETCHED'
+        },
+        species: action.payload.species
       }
     }
-    case FETCHING_SPECIES: {
+    case speciesConstants.SET_ERROR: {
       return {
         ...state,
-        fetching: true,
-        fetched: false
-      }
-    }
-    case FETCHED_SPECIES: {
-      return {
-        ...state,
-        fetching: false,
-        fetched: true
-      }
-    }
-    case RESET_SPECIES: {
-      return {
-        ...state,
-        error: undefined
+        status: {
+          code: 'ERROR',
+          message: action.payload.error
+        }
       }
     }
     default:

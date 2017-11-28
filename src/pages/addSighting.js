@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import 'react-datetime/css/react-datetime.css'
-import { addSightingAction } from '../redux/actions/sightingsActions'
-import { getSpecies } from '../redux/actions/speciesActions'
+import * as sightingsActions from '../redux/actions/sightingsActions'
+import * as speciesActions from '../redux/actions/speciesActions'
 
 import TextInput from '../components/form/textInput'
 import SelectInput from '../components/form/selectInput'
@@ -24,10 +24,10 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
   return {
     addSighting: (species, dateTime, description, count) => {
-      dispatch(addSightingAction(species, dateTime, description, count))
+      dispatch(sightingsActions.addSighting(species, dateTime, description, count))
     },
     getSpecies: () => {
-      dispatch(getSpecies())
+      dispatch(speciesActions.getSpecies())
     }
   }
 }
@@ -195,8 +195,8 @@ export class AddSightingComponent extends React.Component {
   }
 
   render() {
-    const { species, fetched } = this.props.species
-    if (fetched) {
+    const { species } = this.props.species
+    if (this.props.species.status.code == 'FETCHED') {
       if (this.state.redirect) {
         // Redirect if adding successful
         return <Redirect to="/" />

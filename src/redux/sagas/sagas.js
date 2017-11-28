@@ -40,7 +40,7 @@ export function* addSighting(action) {
       count: action.payload.count
     })
     // Refetch all sightings so front end and back end are synchronized
-    yield put(sightingActions.updateAll())
+    yield put(sightingActions.getSightings())
     // Notify user that sighting has been added
     Alert.success('Sighting added successfully', {
       position: 'bottom',
@@ -54,7 +54,7 @@ export function* addSighting(action) {
 
 // Watcher sagas
 export function* watchSightings() {
-  yield takeEvery(sightingConstants.UPDATE_ALL_SIGHTINGS, updateSightings)
+  yield takeEvery(sightingConstants.GET_SIGHTINGS, updateSightings)
 }
 
 export function* watchSpecies() {

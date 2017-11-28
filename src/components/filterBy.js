@@ -4,23 +4,24 @@ is filtered and filterQuery is the query to filter by. Does not mutate original 
 import moment from 'moment'
 
 const filterBy = (array, argumentsJSON) => {
+  console.log(argumentsJSON)
   let arrayCopy = array.slice() // Copy array so original is not mutated
   if (argumentsJSON.filterBy == 'dateTime') {
     // Filter based on startTime&endTime
-    if (argumentsJSON.startTime != undefined) {
+    if (argumentsJSON.filterArguments.startTime != undefined) {
       arrayCopy = arrayCopy.filter(row => {
-        return moment(row['dateTime']).isAfter(argumentsJSON.startTime)
+        return moment(row['dateTime']).isAfter(argumentsJSON.filterArguments.startTime)
       })
     }
-    if (argumentsJSON.endTime != undefined) {
+    if (argumentsJSON.filterArguments.endTime != undefined) {
       arrayCopy = arrayCopy.filter(row => {
-        return moment(row['dateTime']).isBefore(argumentsJSON.endTime)
+        return moment(row['dateTime']).isBefore(argumentsJSON.filterArguments.endTime)
       })
     }
   }
   if (argumentsJSON.filterBy == 'species') {
     arrayCopy = arrayCopy.filter(row => {
-      return row[argumentsJSON.filterBy] == argumentsJSON.filterQuery
+      return row[argumentsJSON.filterBy] == argumentsJSON.filterArguments.filterQuery
     })
   }
 

@@ -1,15 +1,24 @@
 import sightings from '../../redux/reducers/sightingsReducer'
 
-import {
-  FETCHED_SIGHTINGS,
-  ERROR_SIGHTINGS,
-  SIGHTINGS,
-  RESET_SIGHTINGS
-} from '../../redux/constants/sightings'
+import * as constants from '../../redux/constants/sightings'
 
 const initialState = {
-  fetched: false,
-  error: undefined,
+  status: {
+    code: 'NOT_FETCHED',
+    message: undefined
+  },
+  order: {
+    column: 'dateTime',
+    direction: 'ASCENDING'
+  },
+  filter: {
+    column: undefined,
+    filterArguments: {
+      filterQuery: undefined,
+      startTime: undefined,
+      endTime: undefined
+    }
+  },
   sightings: []
 }
 
@@ -20,7 +29,7 @@ test('Should return initial state', () => {
 test('Should update all sightings', () => {
   expect(
     sightings(undefined, {
-      type: SIGHTINGS,
+      type: constants.SET_SIGHTINGS,
       payload: {
         sightings: [
           {
@@ -33,8 +42,22 @@ test('Should update all sightings', () => {
       }
     })
   ).toEqual({
-    fetched: true,
-    error: undefined,
+    status: {
+      code: 'FETCHED',
+      message: undefined
+    },
+    order: {
+      column: 'dateTime',
+      direction: 'ASCENDING'
+    },
+    filter: {
+      column: undefined,
+      filterArguments: {
+        filterQuery: undefined,
+        startTime: undefined,
+        endTime: undefined
+      }
+    },
     sightings: [
       {
         id: 'int',
@@ -46,42 +69,31 @@ test('Should update all sightings', () => {
   })
 })
 
-test('Should switch state to fetched', () => {
-  expect(sightings(undefined, { type: FETCHED_SIGHTINGS })).toEqual({
-    fetching: false,
-    fetched: true,
-    error: undefined,
-    sightings: []
-  })
-})
-
 test('Should set error state', () => {
   expect(
     sightings(undefined, {
-      type: ERROR_SIGHTINGS,
+      type: constants.SET_ERROR,
       payload: {
         error: 'Some error'
       }
     })
   ).toEqual({
-    fetching: false,
-    fetched: false,
-    error: 'Some error',
-    sightings: []
-  })
-})
-
-test('Should reset error state to default', () => {
-  const errorState = {
-    fetching: false,
-    fetched: false,
-    error: 'Some error',
-    sightings: []
-  }
-  expect(sightings(errorState, { type: RESET_SIGHTINGS })).toEqual({
-    fetching: false,
-    fetched: false,
-    error: undefined,
+    status: {
+      code: 'ERROR',
+      message: 'Some error'
+    },
+    order: {
+      column: 'dateTime',
+      direction: 'ASCENDING'
+    },
+    filter: {
+      column: undefined,
+      filterArguments: {
+        filterQuery: undefined,
+        startTime: undefined,
+        endTime: undefined
+      }
+    },
     sightings: []
   })
 })

@@ -21,7 +21,12 @@ export default class SelectInput extends React.Component {
     return (
       <div className="form-group">
         <label htmlFor={this.props.id}>{this.props.name}</label>
-        <select className={classes} id={this.props.id} onChange={this.props.onChange}>
+        <select
+          className={classes}
+          id={this.props.id}
+          onChange={this.props.onChange}
+          value={this.props.value ? this.props.value : this.props.defaultValue}
+        >
           <option defaultValue>{this.props.defaultValue}</option>
           {options}
         </select>

@@ -1,19 +1,13 @@
-import {
-  UPDATE_ALL_SIGHTINGS,
-  SIGHTINGS,
-  ERROR_SIGHTINGS,
-  ADD_SIGHTING
-} from '../constants/sightings'
-
-export const updateAll = () => {
+import * as constants from '../constants/sightings'
+export const getSightings = () => {
   return {
-    type: UPDATE_ALL_SIGHTINGS
+    type: constants.GET_SIGHTINGS
   }
 }
 
 export const setSightings = data => {
   return {
-    type: SIGHTINGS,
+    type: constants.SET_SIGHTINGS,
     payload: {
       sightings: data
     }
@@ -22,21 +16,53 @@ export const setSightings = data => {
 
 export const setError = error => {
   return {
-    type: ERROR_SIGHTINGS,
+    type: constants.SET_ERROR,
     payload: {
       error
     }
   }
 }
 
-export const addSightingAction = (species, dateTime, description, count) => {
+export const addSighting = (species, dateTime, description, count) => {
   return {
-    type: ADD_SIGHTING,
+    type: constants.ADD_SIGHTING,
     payload: {
       species,
       dateTime,
       description,
       count
     }
+  }
+}
+
+export const setOrder = (column, direction) => {
+  return {
+    type: constants.SET_ORDER,
+    payload: {
+      column,
+      direction
+    }
+  }
+}
+
+export const resetOrder = () => {
+  return {
+    type: constants.RESET_ORDER
+  }
+}
+
+export const setFilter = (column, filterArguments) => {
+  return {
+    type: constants.SET_FILTER,
+    payload: {
+      column,
+      filterArguments
+    }
+  }
+}
+
+export const resetFilter = () => {
+  return {
+    type: constants.RESET_FILTER
   }
 }
