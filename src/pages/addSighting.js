@@ -211,6 +211,7 @@ export class AddSightingComponent extends React.Component {
             optionsList={species}
             onChange={this.handleSpecies}
             valid={this.state.species.valid}
+            value={this.state.species.value}
           />
           <TextInput
             name="Count"

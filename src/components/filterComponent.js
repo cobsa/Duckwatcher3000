@@ -73,9 +73,9 @@ export class FilterComponent extends React.Component {
     }
   }
   handleEndTime(endTime) {
-    // Check that is moment and not string
+    // Check that is moment and not string and modified moment to be end of day instead of start of day
     if (endTime instanceof moment) {
-      this.props.setFilter('dateTime', { endTime, filterQuery: undefined }) // Set other filter arguments to undefined
+      this.props.setFilter('dateTime', { endTime: endTime.endOf('day'), filterQuery: undefined }) // Set other filter arguments to undefined
     }
   }
   resetFilters(e) {
@@ -84,7 +84,6 @@ export class FilterComponent extends React.Component {
   }
   render() {
     const classes = 'form-control'
-    console.log(this.state)
     if (this.props.species.status.code == 'FETCHED') {
       return (
         <div>
@@ -104,6 +103,7 @@ export class FilterComponent extends React.Component {
             <div className="card card-body">
               <form className="form-inline">
                 <div className="form-group">
+                  <span className="filter-label">Filter by time period</span>
                   <DateTime
                     value={this.props.sightings.filter.filterArguments.startTime}
                     defaultValue="Select start time"
@@ -122,7 +122,7 @@ export class FilterComponent extends React.Component {
                   />
                 </div>
                 <div className="form-group">
-                  or
+                  <span className="filter-label">Filter by species</span>
                   <SelectInput
                     value={this.props.sightings.filter.filterArguments.filterQuery}
                     defaultValue="Choose species"

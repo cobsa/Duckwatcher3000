@@ -41,6 +41,10 @@
   font-size: 1.4em;
   border-radius: 0;
 }
+.filter-label {
+  margin: 0 1em 0 1em;
+  font-size: 15px;
+}
 /* Loading spinner*/
 
 @keyframes spinner {

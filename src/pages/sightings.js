@@ -98,7 +98,7 @@ class SightingsComponent extends React.Component {
           handleEndTime={this.handleEndTime}
           resetFilters={this.resetFilters}
         />
-        <table className="table">
+        <table className="table table-hover">
           <thead className="thead-dark">
             <tr>
               <Header
