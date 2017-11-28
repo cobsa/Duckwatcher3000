@@ -19,7 +19,6 @@ import Sightings from './pages/sightings'
 import AddSighting from './pages/addSighting'
 import rootReducer from './redux/reducers/rootReducer'
 import Navbar from './components/navbar'
-import ShowError from './components/showError'
 import rootSaga from './redux/sagas/sagas'
 
 // Setup store with history, logger and sagaMiddleware
@@ -38,7 +37,6 @@ ReactDom.render(
         <div className="navContainer">
           <Navbar />
         </div>
-        <ShowError />
         <div className="content">
           <Route exact path="/" component={Sightings} />
           <Route path="/addSighting" component={AddSighting} />

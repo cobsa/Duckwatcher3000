@@ -18,6 +18,12 @@ export function* updateSightings() {
     yield put(sightingActions.setSightings(response.data))
   } catch (e) {
     yield put(sightingActions.setError(e.message))
+    // Show error message to user
+    Alert.error('Network error: ', {
+      position: 'bottom',
+      effect: 'scale',
+      timeout: 4000
+    })
   }
 }
 
@@ -27,6 +33,12 @@ export function* updateSpecies() {
     yield put(speciesActions.setSpecies(response.data))
   } catch (e) {
     yield put(speciesActions.setError(e.message))
+    // Show error message to user
+    Alert.error('Network error', {
+      position: 'bottom',
+      effect: 'scale',
+      timeout: 4000
+    })
   }
 }
 
