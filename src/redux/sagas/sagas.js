@@ -19,7 +19,7 @@ export function* updateSightings() {
   } catch (e) {
     yield put(sightingActions.setError(e.message))
     // Show error message to user
-    Alert.error('Network error: ', {
+    Alert.error('Network error ', {
       position: 'bottom',
       effect: 'scale',
       timeout: 4000

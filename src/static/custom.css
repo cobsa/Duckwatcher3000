@@ -31,7 +31,7 @@
   font-size: 18px;
   line-height: 1;
 }
-
+/* Sightings page*/
 .active-icon {
   color: red;
 }
@@ -44,6 +44,10 @@
 .filter-label {
   margin: 0 1em 0 1em;
   font-size: 15px;
+}
+
+.btn-clear-filter {
+  margin-left: 1em;
 }
 /* Loading spinner*/
 

@@ -130,7 +130,7 @@ export class FilterComponent extends React.Component {
                     onChange={this.validateSpecies}
                   />
                 </div>
-                <button onClick={this.resetFilters} className="btn btn-primary">
+                <button onClick={this.resetFilters} className="btn btn-primary btn-clear-filter">
                   Clear filters
                 </button>
               </form>

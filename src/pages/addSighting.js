@@ -55,7 +55,7 @@ export class AddSightingComponent extends React.Component {
         valid: undefined
       },
       count: {
-        value: 0,
+        value: '',
         valid: undefined
       },
       redirect: false
@@ -95,7 +95,7 @@ export class AddSightingComponent extends React.Component {
     e.preventDefault()
     // Check if value is null
     if (e.target.value != '') {
-      const value = parseInt(e.target.value)
+      const value = parseInt(e.target.value, 10)
       let valid = false
       if (value > 0) {
         valid = true
@@ -104,6 +104,14 @@ export class AddSightingComponent extends React.Component {
         count: {
           value,
           valid
+        }
+      })
+    } else {
+      // Allows user to erase all numbers from count input
+      this.setState({
+        count: {
+          value: e.target.value,
+          valid: false
         }
       })
     }
