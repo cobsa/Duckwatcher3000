@@ -29,12 +29,24 @@ let speciesInitial = {
 }
 
 test('Add Sighting Page renders', () => {
-  const page = shallow(<AddSightingComponent species={speciesInitial} getSpecies={sinon.spy()} />)
+  const page = shallow(
+    <AddSightingComponent
+      species={speciesInitial}
+      getSpecies={sinon.spy()}
+      translate={sinon.spy()}
+    />
+  )
   expect(page.exists()).toBeTruthy()
 })
 
 test('Should render Loading component', () => {
-  const page = shallow(<AddSightingComponent species={speciesInitial} getSpecies={sinon.spy()} />)
+  const page = shallow(
+    <AddSightingComponent
+      species={speciesInitial}
+      getSpecies={sinon.spy()}
+      translate={sinon.spy()}
+    />
+  )
   expect(page.find(Loading).length).toEqual(1)
 })
 
@@ -47,7 +59,11 @@ test('Should render normal state ie. not loading component', () => {
     species: []
   }
   const page = shallow(
-    <AddSightingComponent species={initialDataLoaded} getSpecies={sinon.spy()} />
+    <AddSightingComponent
+      species={initialDataLoaded}
+      getSpecies={sinon.spy()}
+      translate={sinon.spy()}
+    />
   )
   expect(page.find(Loading).length).toEqual(0)
 })
@@ -61,7 +77,11 @@ test('Should render Redirect component', () => {
     species: []
   }
   const page = shallow(
-    <AddSightingComponent species={initialDataLoaded} getSpecies={sinon.spy()} />
+    <AddSightingComponent
+      species={initialDataLoaded}
+      getSpecies={sinon.spy()}
+      translate={sinon.spy()}
+    />
   )
   page.setState({
     redirect: true
@@ -100,14 +120,15 @@ test('Should send valid user input data to addSighting method', () => {
       species={initialSpeciesData}
       getSpecies={sinon.spy()}
       addSighting={addSightingSpy}
+      translate={sinon.spy()}
     />
   )
   const textInputs = page.find(TextInput)
-  const countInput = textInputs.find({ name: 'Count' })
+  const countInput = textInputs.find({ id: 'inputCount' })
   // Hack because .simulate('change') doesn't work
   countInput.props().onChange({ target: { value: 10 }, preventDefault: sinon.spy() })
   expect(page.state().count.valid).toBeTruthy()
-  const descriptionInput = textInputs.find({ name: 'Description' })
+  const descriptionInput = textInputs.find({ id: 'inputDescription' })
   // Hack because .simulate('change') doesn't work
   descriptionInput
     .props()

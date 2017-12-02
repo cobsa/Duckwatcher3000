@@ -1,20 +1,35 @@
+/* 
+Handles navigation and changing language.
+*/
+
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-/* Navigation bar component */
+import { setActiveLanguage, getTranslate } from 'react-localize-redux'
 
 const mapStateToProps = state => {
   return {
-    pathname: state.router.location.pathname
+    pathname: state.router.location.pathname,
+    translate: getTranslate(state.locale)
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    changeLanguage: language => {
+      dispatch(setActiveLanguage(language))
+    }
+  }
+}
+
+/* Navigation bar component */
 export class NavbarComponent extends React.Component {
   render() {
+    const { translate } = this.props
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <Link className="navbar-brand" to="/">
-          DuckWatcher 3000
+          {translate('navigation.title')}
         </Link>
         <button
           className="navbar-toggler"
@@ -32,21 +47,27 @@ export class NavbarComponent extends React.Component {
           <ul className="navbar-nav mr-auto">
             <li className={this.props.pathname === '/' ? 'active nav-item' : 'nav-item'}>
               <Link className="nav-link" to="/">
-                Sightings
+                {translate('navigation.sightings')}
               </Link>
             </li>
             <li className={this.props.pathname === '/addSighting' ? 'active nav-item' : 'nav-item'}>
               <Link className="nav-link" to="/addSighting">
-                Add Sighting
+                {translate('navigation.addSighting')}
               </Link>
             </li>
           </ul>
+          <button className="language-btn" onClick={this.props.changeLanguage.bind(this, 'en')}>
+            <img className="flag-image" src="../static/flags/en.png" />
+          </button>
+          <button className="language-btn" onClick={this.props.changeLanguage.bind(this, 'fi')}>
+            <img className="flag-image" src="../static/flags/fi.png" />
+          </button>
         </div>
       </nav>
     )
   }
 }
 
-const Navbar = connect(mapStateToProps)(NavbarComponent)
+const Navbar = connect(mapStateToProps, mapDispatchToProps)(NavbarComponent)
 
 export default Navbar

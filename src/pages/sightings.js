@@ -1,9 +1,11 @@
-/* Page shows listing of current sightings */
+/* Page shows listing of current sightings. 
+Handles sorting and filtering of the sightings. Reads filter arguments and sightings data from redux */
 
 // Node packages
 import React from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
+import { getTranslate } from 'react-localize-redux'
 
 // Custom packages
 
@@ -20,7 +22,8 @@ import Filter from '../components/filterComponent'
 const mapStateToProps = state => {
   return {
     sightings: state.sightings,
-    location: state.router.location
+    location: state.router.location,
+    translate: getTranslate(state.locale)
   }
 }
 
@@ -58,6 +61,7 @@ class SightingsComponent extends React.Component {
   }
 
   handleSort(column, event) {
+    // Handles sort, sorting is handled via redux to persist sorting state between changing pages
     if (this.props.sightings.order.column !== column) {
       this.props.setOrder(column, 'ASCENDING')
     } else {
@@ -71,6 +75,7 @@ class SightingsComponent extends React.Component {
 
   render() {
     const { sightings, status } = this.props.sightings
+    const { translate } = this.props
     let listOfSightings
     if (status.code == 'FETCHED') {
       // Filter list
@@ -104,28 +109,28 @@ class SightingsComponent extends React.Component {
               <Header
                 orderBy={this.props.sightings.order.column}
                 reverseOrder={this.props.sightings.order.direction == 'ASCENDING' ? true : false}
-                name="DateTime"
+                name={translate('table.dateTime')}
                 type="dateTime"
                 onClick={this.handleSort}
               />
               <Header
                 orderBy={this.props.sightings.order.column}
                 reverseOrder={this.props.sightings.order.direction == 'ASCENDING' ? true : false}
-                name="Description"
+                name={translate('table.description')}
                 type="description"
                 onClick={this.handleSort}
               />
               <Header
                 orderBy={this.props.sightings.order.column}
                 reverseOrder={this.props.sightings.order.direction == 'ASCENDING' ? true : false}
-                name="Species"
+                name={translate('table.species')}
                 type="species"
                 onClick={this.handleSort}
               />
               <Header
                 orderBy={this.props.sightings.order.column}
                 reverseOrder={this.props.sightings.order.direction == 'ASCENDING' ? true : false}
-                name="Count"
+                name={translate('table.count')}
                 type="count"
                 onClick={this.handleSort}
               />
@@ -137,6 +142,8 @@ class SightingsComponent extends React.Component {
     )
   }
 }
+
+// Connect to store
 
 const Sightings = connect(mapStateToProps, mapDispatchToProps)(SightingsComponent)
 

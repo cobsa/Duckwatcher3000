@@ -21,7 +21,7 @@ export default class DatePicker extends React.Component {
     let classes = 'form-control ' + valid
     return (
       <div className="form-group">
-        <label htmlFor="inputDateTime">Time</label>
+        <label htmlFor="inputDateTime">{this.props.name}</label>
         <DateTime
           value={this.state.value}
           defaultValue={moment().startOf('hour')}
@@ -32,10 +32,9 @@ export default class DatePicker extends React.Component {
           }}
           inputProps={{ className: classes }}
           className={classes}
+          dateFormat="DD/MM/YYYY"
         />
-        <div className="invalid-feedback">
-          Please select date and time that is not in the future
-        </div>
+        <div className="invalid-feedback">{this.props.errorMessage}</div>
       </div>
     )
   }

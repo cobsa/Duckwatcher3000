@@ -1,6 +1,7 @@
-import { put, takeEvery, all, call } from 'redux-saga/effects'
+import { put, takeEvery, all, call, select } from 'redux-saga/effects'
 import axios from 'axios'
 import Alert from 'react-s-alert'
+import { getTranslate } from 'react-localize-redux'
 
 // Sighting reducer
 import * as sightingConstants from '../constants/sightings'
@@ -19,7 +20,9 @@ export function* updateSightings() {
   } catch (e) {
     yield put(sightingActions.setError(e.message))
     // Show error message to user
-    Alert.error('Network error ', {
+    const state = yield select() // Get state for getTranslate
+    const translate = getTranslate(state.locale) // Get translate function
+    Alert.error(translate('alerts.error.network'), {
       position: 'bottom',
       effect: 'scale',
       timeout: 4000
@@ -34,7 +37,9 @@ export function* updateSpecies() {
   } catch (e) {
     yield put(speciesActions.setError(e.message))
     // Show error message to user
-    Alert.error('Network error', {
+    const state = yield select() // Get state for getTranslate
+    const translate = getTranslate(state.locale) // Get translate function
+    Alert.error(translate('alerts.error.network'), {
       position: 'bottom',
       effect: 'scale',
       timeout: 4000
@@ -54,7 +59,9 @@ export function* addSighting(action) {
     // Refetch all sightings so front end and back end are synchronized
     yield put(sightingActions.getSightings())
     // Notify user that sighting has been added
-    Alert.success('Sighting added successfully', {
+    const state = yield select() // Get state for getTranslate
+    const translate = getTranslate(state.locale) // Get translate function
+    Alert.success(translate('alerts.success.addSighting'), {
       position: 'bottom',
       effect: 'scale',
       timeout: 4000

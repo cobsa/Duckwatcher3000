@@ -3,6 +3,7 @@ import React from 'react'
 import moment from 'moment'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import { getTranslate } from 'react-localize-redux'
 
 import 'react-datetime/css/react-datetime.css'
 import * as sightingsActions from '../redux/actions/sightingsActions'
@@ -14,10 +15,11 @@ import DatePicker from '../components/form/dateTimePicker'
 import Loading from '../components/loading'
 
 // Connect to store
-const mapStateToProps = store => {
+const mapStateToProps = state => {
   return {
-    species: store.species,
-    location: store.router.location
+    species: state.species,
+    location: state.router.location,
+    translate: getTranslate(state.locale)
   }
 }
 
@@ -204,6 +206,7 @@ export class AddSightingComponent extends React.Component {
 
   render() {
     const { species } = this.props.species
+    const { translate } = this.props
     if (this.props.species.status.code == 'FETCHED') {
       if (this.state.redirect) {
         // Redirect if adding successful
@@ -212,39 +215,42 @@ export class AddSightingComponent extends React.Component {
       return (
         <form onSubmit={this.handleSubmit} noValidate>
           <SelectInput
-            name="Select Species"
+            name={translate('addSighting.label.species')}
             id="speciesSelect"
-            defaultValue="Select duck species"
-            errorMessage="Please select duck species from list"
+            defaultValue={translate('addSighting.hints.species')}
+            errorMessage={translate('addSighting.error.species')}
             optionsList={species}
             onChange={this.handleSpecies}
             valid={this.state.species.valid}
             value={this.state.species.value}
           />
           <TextInput
-            name="Count"
+            name={translate('addSighting.label.count')}
             id="inputCount"
             type="number"
-            placeholder="Input amount of ducks sighted"
+            placeholder={translate('addSighting.hints.count')}
             valid={this.state.count.valid}
-            errorMessage="Input amount that is greater than zero"
+            errorMessage={translate('addSighting.error.count')}
             onChange={this.handleCount}
             value={this.state.count.value}
           />
           <TextInput
-            name="Description"
+            name={translate('addSighting.label.description')}
             id="inputDescription"
             type="text"
-            placeholder="Short description of sighting"
-            errorMessage="Description can't be empty"
+            placeholder={translate('addSighting.hints.description')}
+            errorMessage={translate('addSighting.error.description')}
             value={this.state.description.value}
             onChange={this.handleDescription}
             valid={this.state.description.valid}
           />
           <DatePicker
+            name={translate('addSighting.label.time')}
             value={this.state.dateTime.value}
             valid={this.state.dateTime.valid}
             handleDateTimeChange={this.handleDateTimeChange}
+            defaultValue={translate('addSighting.hints.time')}
+            errorMessage={translate('addSighting.error.time')}
           />
           <button type="submit" className="btn btn-primary">
             Submit sighting

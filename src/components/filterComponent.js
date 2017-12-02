@@ -1,7 +1,12 @@
+/* 
+Container for filter element in sightings page. Selected filters are passed to redux.
+ */
+
 import React from 'react'
 import moment from 'moment'
 import DateTime from 'react-datetime'
 import { connect } from 'react-redux'
+import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 
 import SelectInput from '../components/form/selectInput'
 import * as speciesActions from '../redux/actions/speciesActions'
@@ -10,7 +15,9 @@ import * as sightingsActions from '../redux/actions/sightingsActions'
 const mapStateToProps = state => {
   return {
     species: state.species,
-    sightings: state.sightings
+    sightings: state.sightings,
+    translate: getTranslate(state.locale),
+    getLanguage: getActiveLanguage(state.locale).code
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -42,7 +49,10 @@ export class FilterComponent extends React.Component {
     if (this.props.sightings.filter.column != undefined) {
       this.setState({
         collapsed: false
-      }) // WARNING: Potential performance issue
+      })
+      /* WARNING: Potential performance issue since using setState
+      in componentDidMount() is no recommended in large quantities
+      */
     }
   }
   validateSpecies(e) {
@@ -83,8 +93,10 @@ export class FilterComponent extends React.Component {
     this.props.resetFilter()
   }
   render() {
+    const { translate, getLanguage } = this.props
     const classes = 'form-control'
     if (this.props.species.status.code == 'FETCHED') {
+      const { startTime, endTime } = this.props.sightings.filter.filterArguments
       return (
         <div>
           <p>
@@ -96,42 +108,47 @@ export class FilterComponent extends React.Component {
               aria-expanded="false"
               aria-controls="collapseExample"
             >
-              Filter
+              {translate('filter.filter')}
             </button>
           </p>
           <div className={this.state.collapsed ? 'collapse' : 'collapse.show'} id="filterMenu">
             <div className="card card-body">
               <form className="form-inline">
                 <div className="form-group">
-                  <span className="filter-label">Filter by time period</span>
+                  <span className="filter-label">{translate('filter.filterByTime')}</span>
                   <DateTime
-                    value={this.props.sightings.filter.filterArguments.startTime}
-                    defaultValue="Select start time"
+                    value={startTime}
                     timeFormat={false}
                     onChange={this.handleStartTime}
                     inputProps={{ className: classes }}
                     className={classes}
-                  />-
+                    dateFormat="DD/MM/YYYY"
+                    locale={getLanguage}
+                    inputProps={{ placeholder: translate('filter.startTime') }}
+                  />
+                  <span className="filter-date-separator">-</span>
                   <DateTime
-                    value={this.props.sightings.filter.filterArguments.endTime}
-                    defaultValue="Select end time"
+                    value={endTime}
                     timeFormat={false}
                     onChange={this.handleEndTime}
                     inputProps={{ className: classes }}
                     className={classes}
+                    dateFormat="DD/MM/YYYY"
+                    locale={getLanguage}
+                    inputProps={{ placeholder: translate('filter.endTime') }}
                   />
                 </div>
                 <div className="form-group">
-                  <span className="filter-label">Filter by species</span>
+                  <span className="filter-label">{translate('filter.filterBySpecies')}</span>
                   <SelectInput
                     value={this.props.sightings.filter.filterArguments.filterQuery}
-                    defaultValue="Choose species"
+                    defaultValue={translate('filter.species')}
                     optionsList={this.props.species.species}
                     onChange={this.validateSpecies}
                   />
                 </div>
                 <button onClick={this.resetFilters} className="btn btn-primary btn-clear-filter">
-                  Clear filters
+                  {translate('filter.clearFilter')}
                 </button>
               </form>
             </div>

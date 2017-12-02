@@ -1,0 +1,51 @@
+{
+  "navigation": {
+    "title": "TipuBongari 3000",
+    "sightings": "Bongaukset",
+    "addSighting": "Lisää bongaus"
+  },
+  "filter": {
+    "filter": "Suodata",
+    "filterByTime": "Aikajakson perusteella",
+    "filterBySpecies": "Ankkalajin perusteella",
+    "startTime": "Aloitusaika",
+    "endTime": "Lopetusaika",
+    "species": "Valitse ankkalaji",
+    "clearFilter": "Nollaa"
+  },
+  "table": {
+    "dateTime": "Päiväys",
+    "description": "Kuvaus",
+    "species": "Ankkalaji",
+    "count": "Määrä"
+  },
+  "addSighting": {
+    "label": {
+      "species": "Ankkalaji",
+      "count": "Määrä",
+      "description": "Kuvaus",
+      "time": "Päiväys"
+    },
+    "hints": {
+      "species": "Valitse ankkalaji",
+      "count": "Bongattujen ankkojen määrä",
+      "description": "Lyhyt kuvaus bongauksesta",
+      "time": "Bongauksen aika ja päivämäärä"
+    },
+    "error": {
+      "species": "Olkaa hyvä ja valitkaa jokin ankkalaji",
+      "count": "Bongattujen ankkojen määrä on oltava suurempi kuin 0",
+      "description": "Kuvaus ei voi olla tyhjä",
+      "time": "Olkaa hyvä ja valitkaa paikkaansa pitävä aika ja päivämäärä"
+    },
+    "submit": "Lisää bongaus"
+  },
+  "alerts": {
+    "error": {
+      "network": "Verkko-ongelma"
+    },
+    "success": {
+      "addSighting": "Bongaus on lisätty onnistuneesti"
+    }
+  }
+}
