@@ -11,7 +11,8 @@
     "startTime": "Select start time",
     "endTime": "Select end time",
     "species": "Choose species",
-    "clearFilter": "Clear filters"
+    "clearFilter": "Clear filters",
+    "noResults": "No results found"
   },
   "table": {
     "dateTime": "DateTime",

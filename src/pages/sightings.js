@@ -18,6 +18,7 @@ import SelectInput from '../components/form/selectInput'
 
 import Loading from '../components/loading'
 import Filter from '../components/filterComponent'
+import Empty from '../components/table/empty'
 
 const mapStateToProps = state => {
   return {
@@ -77,21 +78,26 @@ class SightingsComponent extends React.Component {
     const { sightings, status } = this.props.sightings
     const { translate } = this.props
     let listOfSightings
+    let emptyAlert
     if (status.code == 'FETCHED') {
       // Filter list
       let filteredSightings = filterBy(sightings, {
         filterBy: this.props.sightings.filter.column,
         filterArguments: this.props.sightings.filter.filterArguments
       })
-      // Sort list
-      let sortedSightings = sortBy(
-        filteredSightings,
-        this.props.sightings.order.column,
-        this.props.sightings.order.direction == 'ASCENDING' ? true : false
-      )
-      listOfSightings = sortedSightings.map(sighting => {
-        return <Sighting key={sighting.id} {...sighting} />
-      })
+      if (filteredSightings.length > 0) {
+        // Sort list
+        let sortedSightings = sortBy(
+          filteredSightings,
+          this.props.sightings.order.column,
+          this.props.sightings.order.direction == 'ASCENDING' ? true : false
+        )
+        listOfSightings = sortedSightings.map(sighting => {
+          return <Sighting key={sighting.id} {...sighting} />
+        })
+      } else {
+        emptyAlert = <Empty message={translate('filter.noResults')} />
+      }
     } else {
       return <Loading />
     }
@@ -138,6 +144,7 @@ class SightingsComponent extends React.Component {
           </thead>
           <tbody>{listOfSightings}</tbody>
         </table>
+        {emptyAlert}
       </div>
     )
   }

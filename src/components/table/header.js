@@ -17,7 +17,7 @@ export default class Header extends React.Component {
     let upStyle = 'material-icons'
     let downStyle = 'material-icons'
     if (orderBy === this.props.type) {
-      if (descending) {
+      if (!descending) {
         upStyle = 'material-icons active-icon'
       } else {
         downStyle = 'material-icons active-icon'

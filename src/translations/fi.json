@@ -11,7 +11,8 @@
     "startTime": "Aloitusaika",
     "endTime": "Lopetusaika",
     "species": "Valitse ankkalaji",
-    "clearFilter": "Nollaa"
+    "clearFilter": "Nollaa",
+    "noResults": "Ei tuloksia"
   },
   "table": {
     "dateTime": "Päiväys",
