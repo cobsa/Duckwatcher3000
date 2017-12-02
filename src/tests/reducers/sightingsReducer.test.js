@@ -98,3 +98,120 @@ test('Should set error state', () => {
     sightings: []
   })
 })
+test('Should set sort order', () => {
+  expect(
+    sightings(undefined, {
+      type: constants.SET_ORDER,
+      payload: {
+        column: 'species',
+        direction: 'ASCENDING'
+      }
+    })
+  ).toEqual({
+    status: {
+      code: 'NOT_FETCHED',
+      message: undefined
+    },
+    order: {
+      column: 'species',
+      direction: 'ASCENDING'
+    },
+    filter: {
+      column: undefined,
+      filterArguments: {
+        filterQuery: undefined,
+        startTime: undefined,
+        endTime: undefined
+      }
+    },
+    sightings: []
+  })
+})
+
+test('Should reset sort order', () => {
+  expect(
+    sightings(
+      {
+        status: {
+          code: 'NOT_FETCHED',
+          message: undefined
+        },
+        order: {
+          column: 'species',
+          direction: 'ASCENDING'
+        },
+        filter: {
+          column: undefined,
+          filterArguments: {
+            filterQuery: undefined,
+            startTime: undefined,
+            endTime: undefined
+          }
+        },
+        sightings: []
+      },
+      {
+        type: constants.RESET_ORDER
+      }
+    )
+  ).toEqual(initialState)
+})
+
+test('Should set filter', () => {
+  expect(
+    sightings(undefined, {
+      type: constants.SET_FILTER,
+      payload: {
+        column: 'species',
+        filterArguments: {
+          filterQuery: 'mallard'
+        }
+      }
+    })
+  ).toEqual({
+    status: {
+      code: 'NOT_FETCHED',
+      message: undefined
+    },
+    order: {
+      column: 'dateTime',
+      direction: 'ASCENDING'
+    },
+    filter: {
+      column: 'species',
+      filterArguments: {
+        filterQuery: 'mallard',
+        startTime: undefined,
+        endTime: undefined
+      }
+    },
+    sightings: []
+  })
+})
+
+test('Should reset filter', () => {
+  expect(
+    sightings(
+      {
+        status: {
+          code: 'NOT_FETCHED',
+          message: undefined
+        },
+        order: {
+          column: 'dateTime',
+          direction: 'ASCENDING'
+        },
+        filter: {
+          column: 'species',
+          filterArguments: {
+            filterQuery: 'mallard',
+            startTime: undefined,
+            endTime: undefined
+          }
+        },
+        sightings: []
+      },
+      { type: constants.RESET_FILTER }
+    )
+  ).toEqual(initialState)
+})

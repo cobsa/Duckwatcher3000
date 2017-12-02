@@ -7,7 +7,7 @@ Advance assignment to summer job opening for Vincit Oy
 Project is made using React, react-router, redux and numerous support libraries to handle dateTime,
 alerts, localization and cookies. In addition to required tasks, filtering the sightings and
 localization support was implemented. Prettier and eslint was used to assure constant code styling
-trough out the project.
+through out the project.
 
 Unit tests were made using Enzyme, Jest and Sinon. Main focus of the unit test were reducer and
 components that contain logic.
@@ -16,7 +16,6 @@ components that contain logic.
 
 1. Species are not translated, since data for species is coming from backend and the translations
    should also be there.
-2.
 
 ## Installing
 
@@ -31,6 +30,8 @@ Install dependencies
 ```
 yarn or npm install
 ```
+
+Setup backend information in /src/redux/constants/backend.js
 
 Run front end and back end.
 
@@ -50,8 +51,8 @@ yarn run test or npm run test
 
 ## Built With
 
-* [Moment](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Axios](https://maven.apache.org/) - Dependency Management
-* [react-localize-redux](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-* [react-s-alert]() -
-* [react-datetime]() -
+* [Moment](https://github.com/moment/moment) - Handle date formats
+* [Axios](https://github.com/axios/axios) - Making REST calls
+* [react-localize-redux](https://github.com/ryandrewjohnson/react-localize-redux) - Used to implement localization
+* [react-s-alert](https://github.com/juliancwirko/react-s-alert) - Used to show alerts for user
+* [react-datetime](https://github.com/YouCanBookMe/react-datetime) - Used to pick date&time
