@@ -25,6 +25,7 @@
     "jest/no-focused-tests": "error",
     "jest/no-identical-title": "error",
     "jest/valid-expect": "error",
-    "no-console": "warn"
+    "no-console": "warn",
+    "no-unused-vars": "warn"
   }
 }

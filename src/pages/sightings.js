@@ -40,7 +40,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 // Page that shows all sightings
-class SightingsComponent extends React.Component {
+export class SightingsComponent extends React.Component {
   constructor() {
     super()
     this.handleSort = this.handleSort.bind(this)

@@ -7,7 +7,6 @@ import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
 import logger from 'redux-logger'
 import { createBrowserHistory } from 'history'
 import { Route } from 'react-router'
-import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap'
 import createSageMiddleware from 'redux-saga'
 import Alert from 'react-s-alert' // Module to show alerts
 import { initialize, addTranslationForLanguage } from 'react-localize-redux' // Localization package
