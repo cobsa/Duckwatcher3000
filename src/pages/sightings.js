@@ -4,7 +4,6 @@ Handles sorting and filtering of the sightings. Reads filter arguments and sight
 // Node packages
 import React from 'react'
 import { connect } from 'react-redux'
-import moment from 'moment'
 import { getTranslate } from 'react-localize-redux'
 
 // Custom packages
@@ -14,8 +13,6 @@ import sortBy from '../components/sortBy'
 import filterBy from '../components/filterBy'
 import Header from '../components/table/header'
 import Sighting from '../components/table/row'
-import SelectInput from '../components/form/selectInput'
-
 import Loading from '../components/loading'
 import Filter from '../components/filterComponent'
 import Empty from '../components/table/empty'
@@ -61,7 +58,7 @@ export class SightingsComponent extends React.Component {
     }
   }
 
-  handleSort(column, event) {
+  handleSort(column) {
     // Handles sort, sorting is handled via redux to persist sorting state between changing pages
     if (this.props.sightings.order.column !== column) {
       this.props.setOrder(column, 'ASCENDING')

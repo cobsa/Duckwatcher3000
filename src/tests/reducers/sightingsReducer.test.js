@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import sightings from '../../redux/reducers/sightingsReducer'
 
 import * as constants from '../../redux/constants/sightings'

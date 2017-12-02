@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as actions from '../../redux/actions/sightingsActions'
 import { access } from 'fs'
 import * as constants from '../../redux/constants/sightings'

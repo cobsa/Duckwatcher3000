@@ -1,4 +1,4 @@
-import Enzyme from 'enzyme'
+/* eslint-disable no-unused-vars */
 
 import sortBy from '../../components/sortBy'
 

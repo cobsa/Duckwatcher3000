@@ -50,7 +50,7 @@ export function* updateSpecies() {
 export function* addSighting(action) {
   try {
     // Make axios post call to add new sighting to backend
-    const response = yield call(axios.post, backend + '/sightings', {
+    yield call(axios.post, backend + '/sightings', {
       dateTime: action.payload.dateTime,
       description: action.payload.description,
       species: action.payload.species,

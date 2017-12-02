@@ -13,7 +13,7 @@
     "sourceType": "module"
   },
   "parser": "babel-eslint",
-  "plugins": ["react", "jest", "prettier"],
+  "plugins": ["react", "jest", "prettier", "import"],
   "rules": {
     "prettier/prettier": "error",
     "react/jsx-uses-vars": 2,
@@ -26,6 +26,11 @@
     "jest/no-identical-title": "error",
     "jest/valid-expect": "error",
     "no-console": "warn",
+    "import/no-unresolved": "warn",
+    "import/no-absolute-path": "warn",
+    "import/first": "warn",
+    "import/no-extraneous-dependencies": "warn",
+    "import/no-unassigned-import": ["warn", { "allow": ["**/*.css"] }],
     "no-unused-vars": "warn"
   }
 }

@@ -1,5 +1,5 @@
 // Node packages
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 import ReactDom from 'react-dom'
 import { Provider } from 'react-redux'
 import { applyMiddleware, createStore } from 'redux'

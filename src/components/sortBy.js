@@ -1,8 +1,6 @@
 /* Sorts array of objects by "orderBy" attribute, returns new copy of array.
 Default sorting is ascending */
 
-import moment from 'moment'
-
 const sortBy = (array, orderBy, descending = false) => {
   function compare(a, b) {
     let aToOrder = a[orderBy]
