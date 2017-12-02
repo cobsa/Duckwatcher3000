@@ -4,7 +4,6 @@ is filtered and filterQuery is the query to filter by. Does not mutate original 
 import moment from 'moment'
 
 const filterBy = (array, argumentsJSON) => {
-  console.log(argumentsJSON)
   let arrayCopy = array.slice() // Copy array so original is not mutated
   if (argumentsJSON.filterBy == 'dateTime') {
     // Filter based on startTime&endTime

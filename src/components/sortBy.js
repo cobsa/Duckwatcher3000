@@ -7,11 +7,7 @@ const sortBy = (array, orderBy, descending = false) => {
   function compare(a, b) {
     let aToOrder = a[orderBy]
     let bToOrder = b[orderBy]
-    // When comparing dateTimes convert ISO-8601 value to unix timestamp to assure they are correctly ordered
-    if (orderBy === 'dateTime') {
-      aToOrder = moment(a[orderBy]).unix()
-      bToOrder = moment(b[orderBy]).unix()
-    }
+    // Return original table if orderBy argument is invalid
     if (aToOrder == undefined || bToOrder == undefined) {
       return array
     }
@@ -19,6 +15,16 @@ const sortBy = (array, orderBy, descending = false) => {
       aToOrder = aToOrder.toLowerCase()
       bToOrder = bToOrder.toLowerCase()
     }
+    // Reverse sort order for species and description to allow default order to be A-Z instead Z-A
+    if (orderBy == 'description' || orderBy == 'species') {
+      if (aToOrder < bToOrder) {
+        return 1
+      }
+      if (aToOrder > bToOrder) {
+        return -1
+      }
+    }
+    // Default case, used for count and dateTime
     if (aToOrder < bToOrder) {
       return -1
     }

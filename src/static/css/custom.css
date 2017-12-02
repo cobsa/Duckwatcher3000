@@ -15,7 +15,8 @@
 }
 
 /* Remove button styling*/
-.sortButton {
+.sortButton,
+.language-btn {
   display: flex;
   line-height: 1;
   background: none !important;
@@ -44,6 +45,9 @@
 .filter-label {
   margin: 0 1em 0 1em;
   font-size: 15px;
+}
+.filter-date-separator {
+  margin: 0 0.5em 0 0.5em;
 }
 
 .btn-clear-filter {
@@ -78,4 +82,11 @@
 
 .navbar-nav .nav-item + .nav-item {
   margin-left: 0 !important;
+}
+
+/* Flags */
+
+.flag-image {
+  height: 25px;
+  margin-left: 5px;
 }
