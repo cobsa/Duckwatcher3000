@@ -138,6 +138,12 @@ export class FilterComponent extends React.Component {
                         className: classes,
                         placeholder: translate('filter.startTime')
                       }}
+                      isValidDate={currentDate => {
+                        if (endTime instanceof moment) {
+                          return currentDate.isBefore(endTime)
+                        }
+                        return true
+                      }}
                     />
                     <span className="filter-date-separator">-</span>
                     <DateTime
@@ -148,6 +154,12 @@ export class FilterComponent extends React.Component {
                       dateFormat="DD/MM/YYYY"
                       locale={getLanguage}
                       inputProps={{ className: classes, placeholder: translate('filter.endTime') }}
+                      isValidDate={currentDate => {
+                        if (startTime instanceof moment) {
+                          return currentDate.isSameOrAfter(startTime)
+                        }
+                        return true
+                      }}
                     />
                   </div>
                 </fieldset>
