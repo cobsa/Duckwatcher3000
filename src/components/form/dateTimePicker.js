@@ -5,12 +5,6 @@ import moment from 'moment'
 import DateTime from 'react-datetime'
 
 export default class DatePicker extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      value: undefined
-    }
-  }
   render() {
     // Showing form validation state
     let valid = ''
@@ -23,8 +17,7 @@ export default class DatePicker extends React.Component {
       <div className="form-group">
         <label htmlFor="inputDateTime">{this.props.name}</label>
         <DateTime
-          value={this.state.value}
-          defaultValue={moment().startOf('hour')}
+          value={this.props.value}
           timeFormat="HH:mm:ss"
           onBlur={this.props.handleDateTimeChange}
           isValidDate={currentDate => {
@@ -33,6 +26,8 @@ export default class DatePicker extends React.Component {
           inputProps={{ className: classes }}
           className={classes}
           dateFormat="DD/MM/YYYY"
+          onChange={this.props.handleDateTimeChange}
+          inputProps={{ placeholder: this.props.defaultValue }}
         />
         <div className="invalid-feedback">{this.props.errorMessage}</div>
       </div>

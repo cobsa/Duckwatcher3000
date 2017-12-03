@@ -80,12 +80,22 @@ export class FilterComponent extends React.Component {
     // Check that is moment and not string
     if (startTime instanceof moment) {
       this.props.setFilter('dateTime', { startTime, filterQuery: undefined }) // Set other filter arguments to undefined
+    } else {
+      this.props.setFilter('dateTime', {
+        startTime: moment().startOf('day'),
+        filterQuery: undefined
+      })
     }
   }
   handleEndTime(endTime) {
     // Check that is moment and not string and modified moment to be end of day instead of start of day
     if (endTime instanceof moment) {
       this.props.setFilter('dateTime', { endTime: endTime.endOf('day'), filterQuery: undefined }) // Set other filter arguments to undefined
+    } else {
+      this.props.setFilter('dateTime', {
+        endTime: moment().endOf('day'),
+        filterQuery: undefined
+      })
     }
   }
   resetFilters(e) {
@@ -114,30 +124,33 @@ export class FilterComponent extends React.Component {
           <div className={this.state.collapsed ? 'collapse' : 'collapse.show'} id="filterMenu">
             <div className="card card-body">
               <form className="form-inline">
-                <div className="form-group">
-                  <span className="filter-label">{translate('filter.filterByTime')}</span>
-                  <DateTime
-                    value={startTime}
-                    timeFormat={false}
-                    onChange={this.handleStartTime}
-                    inputProps={{ className: classes }}
-                    className={classes}
-                    dateFormat="DD/MM/YYYY"
-                    locale={getLanguage}
-                    inputProps={{ placeholder: translate('filter.startTime') }}
-                  />
-                  <span className="filter-date-separator">-</span>
-                  <DateTime
-                    value={endTime}
-                    timeFormat={false}
-                    onChange={this.handleEndTime}
-                    inputProps={{ className: classes }}
-                    className={classes}
-                    dateFormat="DD/MM/YYYY"
-                    locale={getLanguage}
-                    inputProps={{ placeholder: translate('filter.endTime') }}
-                  />
-                </div>
+                <fieldset disabled>
+                  <div className="form-group">
+                    <span className="filter-label">{translate('filter.filterByTime')}</span>
+                    <DateTime
+                      value={startTime}
+                      timeFormat={false}
+                      onChange={this.handleStartTime}
+                      className={classes}
+                      dateFormat="DD/MM/YYYY"
+                      locale={getLanguage}
+                      inputProps={{
+                        className: classes,
+                        placeholder: translate('filter.startTime')
+                      }}
+                    />
+                    <span className="filter-date-separator">-</span>
+                    <DateTime
+                      value={endTime}
+                      timeFormat={false}
+                      onChange={this.handleEndTime}
+                      className={classes}
+                      dateFormat="DD/MM/YYYY"
+                      locale={getLanguage}
+                      inputProps={{ className: classes, placeholder: translate('filter.endTime') }}
+                    />
+                  </div>
+                </fieldset>
                 <div className="form-group">
                   <span className="filter-label">{translate('filter.filterBySpecies')}</span>
                   <SelectInput

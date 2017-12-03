@@ -134,14 +134,24 @@ export class AddSightingComponent extends React.Component {
   }
 
   handleDateTimeChange(date) {
-    let valid = date.isBefore(moment())
-    this.setState({
-      dateTime: {
-        value: date,
-        valid
-      }
-    })
+    if (date instanceof moment) {
+      let valid = date.isBefore(moment())
+      this.setState({
+        dateTime: {
+          value: date,
+          valid
+        }
+      })
+    } else {
+      this.setState({
+        dateTime: {
+          value: moment().startOf('hour'),
+          valid: false
+        }
+      })
+    }
   }
+
   validateInputs() {
     // Check that all inputs are valid marks inputs false if user had not inputted any thing
     let allValid = true
@@ -242,16 +252,18 @@ export class AddSightingComponent extends React.Component {
             onChange={this.handleDescription}
             valid={this.state.description.valid}
           />
-          <DatePicker
-            name={translate('addSighting.label.time')}
-            value={this.state.dateTime.value}
-            valid={this.state.dateTime.valid}
-            handleDateTimeChange={this.handleDateTimeChange}
-            defaultValue={translate('addSighting.hints.time')}
-            errorMessage={translate('addSighting.error.time')}
-          />
+          <fieldset disabled>
+            <DatePicker
+              name={translate('addSighting.label.time')}
+              value={this.state.dateTime.value}
+              valid={this.state.dateTime.valid}
+              handleDateTimeChange={this.handleDateTimeChange}
+              defaultValue={translate('addSighting.hints.time')}
+              errorMessage={translate('addSighting.error.time')}
+            />
+          </fieldset>
           <button type="submit" className="btn btn-primary">
-            Submit sighting
+            {translate('addSighting.submit')}
           </button>
         </form>
       )

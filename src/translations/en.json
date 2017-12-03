@@ -15,7 +15,7 @@
     "noResults": "No results found"
   },
   "table": {
-    "dateTime": "DateTime",
+    "dateTime": "Date",
     "description": "Description",
     "species": "Species",
     "count": "Count"
@@ -37,7 +37,7 @@
       "species": "Please select duck species from the list",
       "count": "Please input greater value than zero",
       "description": "Description can't be empty",
-      "time": "Please select date and time that is not in the future"
+      "time": "Please valid date and time"
     },
     "submit": "Add Sighting"
   },
