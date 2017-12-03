@@ -32,6 +32,9 @@ const mapDispatchToProps = dispatch => {
     },
     setOrder: (column, direction) => {
       dispatch(sightingActions.setOrder(column, direction))
+    },
+    resetNewID: () => {
+      dispatch(sightingActions.resetNewSightingID())
     }
   }
 }
@@ -90,7 +93,14 @@ export class SightingsComponent extends React.Component {
           this.props.sightings.order.direction == 'ASCENDING' ? true : false
         )
         listOfSightings = sortedSightings.map(sighting => {
-          return <Sighting key={sighting.id} {...sighting} />
+          return (
+            <Sighting
+              key={sighting.id}
+              {...sighting}
+              newSightingID={this.props.sightings.newSightingID}
+              resetNewID={this.props.resetNewID}
+            />
+          )
         })
       } else {
         emptyAlert = <Empty message={translate('filter.noResults')} />

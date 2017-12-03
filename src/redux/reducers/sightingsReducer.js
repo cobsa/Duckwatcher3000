@@ -25,7 +25,8 @@ import * as constants from '../constants/sightings'
     }, {
         ...
     }
-    ]
+    ],
+    newSightingID: int
 */
 
 let initialState = {
@@ -45,7 +46,8 @@ let initialState = {
       endTime: undefined
     }
   },
-  sightings: []
+  sightings: [],
+  newSightingID: undefined
 }
 
 const sightings = (state = initialState, action) => {
@@ -109,6 +111,18 @@ const sightings = (state = initialState, action) => {
             endTime: undefined
           }
         }
+      }
+    }
+    case constants.SET_NEW_SIGHTING_ID: {
+      return {
+        ...state,
+        newSightingID: action.payload.id
+      }
+    }
+    case constants.RESET_NEW_SIGHTING_ID: {
+      return {
+        ...state,
+        newSightingID: undefined
       }
     }
     default:

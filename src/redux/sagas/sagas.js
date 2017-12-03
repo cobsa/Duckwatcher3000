@@ -49,13 +49,17 @@ export function* updateSpecies() {
 
 export function* addSighting(action) {
   try {
+    let newID
     // Make axios post call to add new sighting to backend
-    yield call(axios.post, backend + '/sightings', {
+    const response = yield call(axios.post, backend + '/sightings', {
       dateTime: action.payload.dateTime,
       description: action.payload.description,
       species: action.payload.species,
       count: action.payload.count
     })
+    if (response.data.id >= 0) {
+      newID = response.data.id
+    }
     // Refetch all sightings so front end and back end are synchronized
     yield put(sightingActions.getSightings())
     // Notify user that sighting has been added
@@ -66,6 +70,10 @@ export function* addSighting(action) {
       effect: 'scale',
       timeout: 4000
     })
+    // Add sightings id to redux so user can have visual cue of the added sighting
+    yield put(sightingActions.setNewSightingId(newID))
+    // Reset filters so user can see newly added sighting
+    yield put(sightingActions.resetFilter())
   } catch (e) {
     yield put(sightingActions.setError(e.message))
   }

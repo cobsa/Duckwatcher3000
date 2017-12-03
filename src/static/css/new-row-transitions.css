@@ -1,0 +1,17 @@
+.newRow-enter {
+  background-color: inherit;
+}
+
+.newRow-enter.newRow-enter-active {
+  background-color: #00bc8c;
+  transition: background-color 4000ms ease-in;
+}
+
+.newRow-exit {
+  background-color: #00bc8c;
+}
+
+.newRow-exit.newRow-exit-active {
+  background-color: inherit;
+  transition: background-color 4000ms ease-out;
+}

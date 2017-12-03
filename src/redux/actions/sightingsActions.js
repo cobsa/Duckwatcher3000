@@ -66,3 +66,18 @@ export const resetFilter = () => {
     type: constants.RESET_FILTER
   }
 }
+
+export const setNewSightingId = id => {
+  return {
+    type: constants.SET_NEW_SIGHTING_ID,
+    payload: {
+      id
+    }
+  }
+}
+
+export const resetNewSightingID = () => {
+  return {
+    type: constants.RESET_NEW_SIGHTING_ID
+  }
+}
