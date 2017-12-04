@@ -3,7 +3,7 @@ import sightings from '../../redux/reducers/sightingsReducer'
 
 import * as constants from '../../redux/constants/sightings'
 
-const initialState = {
+let initialState = {
   status: {
     code: 'NOT_FETCHED',
     message: undefined
@@ -18,9 +18,11 @@ const initialState = {
       filterQuery: undefined,
       startTime: undefined,
       endTime: undefined
-    }
+    },
+    collapsed: true // Controls wether or not filter controls are shown
   },
-  sightings: []
+  sightings: [],
+  newSightingID: undefined
 }
 
 test('Should return initial state', () => {
@@ -57,7 +59,8 @@ test('Should update all sightings', () => {
         filterQuery: undefined,
         startTime: undefined,
         endTime: undefined
-      }
+      },
+      collapsed: true
     },
     sightings: [
       {
@@ -93,7 +96,8 @@ test('Should set error state', () => {
         filterQuery: undefined,
         startTime: undefined,
         endTime: undefined
-      }
+      },
+      collapsed: true
     },
     sightings: []
   })
@@ -122,7 +126,8 @@ test('Should set sort order', () => {
         filterQuery: undefined,
         startTime: undefined,
         endTime: undefined
-      }
+      },
+      collapsed: true
     },
     sightings: []
   })
@@ -146,7 +151,8 @@ test('Should reset sort order', () => {
             filterQuery: undefined,
             startTime: undefined,
             endTime: undefined
-          }
+          },
+          collapsed: true
         },
         sightings: []
       },
@@ -183,8 +189,10 @@ test('Should set filter', () => {
         filterQuery: 'mallard',
         startTime: undefined,
         endTime: undefined
-      }
+      },
+      collapsed: true
     },
+    newSightingID: undefined,
     sightings: []
   })
 })
@@ -207,7 +215,8 @@ test('Should reset filter', () => {
             filterQuery: 'mallard',
             startTime: undefined,
             endTime: undefined
-          }
+          },
+          collapsed: true
         },
         sightings: []
       },

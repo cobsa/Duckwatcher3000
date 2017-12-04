@@ -44,7 +44,8 @@ let initialState = {
       filterQuery: undefined,
       startTime: undefined,
       endTime: undefined
-    }
+    },
+    collapsed: true // Controls wether or not filter controls are shown
   },
   sightings: [],
   newSightingID: undefined
@@ -92,6 +93,7 @@ const sightings = (state = initialState, action) => {
       return {
         ...state,
         filter: {
+          ...state.filter,
           column: action.payload.column,
           filterArguments: Object.assign(
             state.filter.filterArguments,
@@ -104,6 +106,7 @@ const sightings = (state = initialState, action) => {
       return {
         ...state,
         filter: {
+          ...state.filter,
           column: undefined,
           filterArguments: {
             filterQuery: undefined,
@@ -123,6 +126,15 @@ const sightings = (state = initialState, action) => {
       return {
         ...state,
         newSightingID: undefined
+      }
+    }
+    case constants.COLLAPSE_FILTER: {
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          collapsed: action.payload.collapsed
+        }
       }
     }
     default:

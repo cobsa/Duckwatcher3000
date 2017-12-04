@@ -74,6 +74,8 @@ export function* addSighting(action) {
     yield put(sightingActions.setNewSightingId(newID))
     // Reset filters so user can see newly added sighting
     yield put(sightingActions.resetFilter())
+    // Also hide filter controls
+    yield put(sightingActions.collapseFilter(true))
   } catch (e) {
     yield put(sightingActions.setError(e.message))
   }

@@ -81,3 +81,12 @@ export const resetNewSightingID = () => {
     type: constants.RESET_NEW_SIGHTING_ID
   }
 }
+
+export const collapseFilter = collapsed => {
+  return {
+    type: constants.COLLAPSE_FILTER,
+    payload: {
+      collapsed
+    }
+  }
+}

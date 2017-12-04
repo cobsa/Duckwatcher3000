@@ -20,7 +20,6 @@ import Empty from '../components/table/empty'
 const mapStateToProps = state => {
   return {
     sightings: state.sightings,
-    location: state.router.location,
     translate: getTranslate(state.locale)
   }
 }
@@ -52,7 +51,6 @@ export class SightingsComponent extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     // Will force update all when link to sightings is clicked again
-    // TODO: Might not be good way?
     if (
       nextProps.location.pathname === this.props.location.pathname &&
       nextProps.location.key !== this.props.location.key
@@ -79,6 +77,7 @@ export class SightingsComponent extends React.Component {
     const { translate } = this.props
     let listOfSightings
     let emptyAlert
+    // If sightings status is "FETCHED" filter and sort data, otherwise show loading component
     if (status.code == 'FETCHED') {
       // Filter list
       let filteredSightings = filterBy(sightings, {

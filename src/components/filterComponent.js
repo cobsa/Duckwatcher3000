@@ -30,6 +30,9 @@ const mapDispatchToProps = dispatch => {
     },
     resetFilter: () => {
       dispatch(sightingsActions.resetFilter())
+    },
+    collapseFilter: collapsed => {
+      dispatch(sightingsActions.collapseFilter(collapsed))
     }
   }
 }
@@ -40,20 +43,10 @@ export class FilterComponent extends React.Component {
     this.handleStartTime = this.handleStartTime.bind(this)
     this.handleEndTime = this.handleEndTime.bind(this)
     this.resetFilters = this.resetFilters.bind(this)
-    this.state = {
-      collapsed: true
-    }
+    this.handleToggle = this.handleToggle.bind(this)
   }
   componentDidMount() {
     this.props.updateSpecies()
-    if (this.props.sightings.filter.column != undefined) {
-      this.setState({
-        collapsed: false
-      })
-      /* WARNING: Potential performance issue since using setState
-      in componentDidMount() is no recommended in large quantities
-      */
-    }
   }
   validateSpecies(e) {
     const { value } = e.target
@@ -98,12 +91,16 @@ export class FilterComponent extends React.Component {
       })
     }
   }
+  handleToggle() {
+    this.props.collapseFilter(!this.props.sightings.filter.collapsed)
+  }
   resetFilters(e) {
     e.preventDefault()
     this.props.resetFilter()
   }
   render() {
     const { translate, getLanguage } = this.props
+    const { collapsed } = this.props.sightings.filter
     const classes = 'form-control'
     if (this.props.species.status.code == 'FETCHED') {
       const { startTime, endTime } = this.props.sightings.filter.filterArguments
@@ -113,15 +110,12 @@ export class FilterComponent extends React.Component {
             <button
               className="btn btn-primary btn-filter"
               type="button"
-              data-toggle="collapse"
-              data-target="#filterMenu"
-              aria-expanded="false"
-              aria-controls="collapseExample"
+              onClick={this.handleToggle}
             >
               {translate('filter.filter')}
             </button>
           </p>
-          <div className={this.state.collapsed ? 'collapse' : 'collapse.show'} id="filterMenu">
+          <div className={collapsed ? 'collapse' : 'collapse.show'} id="filterMenu">
             <div className="card card-body">
               <form className="form-inline">
                 <fieldset disabled>
