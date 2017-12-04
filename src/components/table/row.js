@@ -18,7 +18,7 @@ export default class Sighting extends React.Component {
           active: false
         })
         props.resetNewID()
-      }, 1000)
+      }, 500)
     }
   }
   render() {

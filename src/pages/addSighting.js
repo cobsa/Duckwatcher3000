@@ -70,7 +70,6 @@ export class AddSightingComponent extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     // Will force update all when link to sightings is clicked again
-    // TODO: Might not be good way?
     if (
       nextProps.location.pathname === this.props.location.pathname &&
       nextProps.location.key !== this.props.location.key
@@ -120,6 +119,7 @@ export class AddSightingComponent extends React.Component {
   }
 
   handleSpecies(e) {
+    // Checks that species is part of species got from back end
     const { value } = e.target
     const { species } = this.props.species
     const valid = species.find(duck => {

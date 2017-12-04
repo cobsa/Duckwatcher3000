@@ -56,12 +56,14 @@ export class NavbarComponent extends React.Component {
               </Link>
             </li>
           </ul>
-          <button className="language-btn" onClick={this.props.changeLanguage.bind(this, 'en')}>
-            <img className="flag-image" src="../static/flags/en.png" />
-          </button>
-          <button className="language-btn" onClick={this.props.changeLanguage.bind(this, 'fi')}>
-            <img className="flag-image" src="../static/flags/fi.png" />
-          </button>
+          <div className="flags-container">
+            <button className="language-btn" onClick={this.props.changeLanguage.bind(this, 'en')}>
+              <img className="flag-image" src="../static/flags/en.png" />
+            </button>
+            <button className="language-btn" onClick={this.props.changeLanguage.bind(this, 'fi')}>
+              <img className="flag-image" src="../static/flags/fi.png" />
+            </button>
+          </div>
         </div>
       </nav>
     )
