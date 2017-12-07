@@ -4,6 +4,8 @@ import React from 'react'
 import moment from 'moment'
 import DateTime from 'react-datetime'
 
+import 'react-datetime/css/react-datetime.css'
+
 export default class DatePicker extends React.Component {
   render() {
     // Showing form validation state

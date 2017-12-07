@@ -84,6 +84,7 @@ export class SightingsComponent extends React.Component {
             {...this.props.sightings}
             handleSort={this.handleSort}
             translate={this.props.translate}
+            resetNewID={this.props.resetNewID}
           />
         </div>
       )
