@@ -8,7 +8,7 @@ import Enzyme from 'enzyme'
 import { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
-import Loading from '../../components/loading'
+import Loading from '../../components/common/loading'
 
 Enzyme.configure({ adapter: new Adapter() })
 

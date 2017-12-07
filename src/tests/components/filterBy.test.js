@@ -2,7 +2,7 @@
 // https://github.com/facebookincubator/create-react-app/issues/3199#issuecomment-332842582
 /* eslint-disable no-unused-vars */
 import moment from 'moment'
-import filterBy from '../../components/filterBy'
+import filterBy from '../../components/helpers/filterBy'
 
 const array = [
   {

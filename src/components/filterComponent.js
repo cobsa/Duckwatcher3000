@@ -52,9 +52,7 @@ export class FilterComponent extends React.Component {
     const { value } = e.target
     const { species } = this.props.species
     const valid = species.find(duck => {
-      if (duck.name == value) {
-        return true
-      }
+      return duck.name === value
     })
     if (valid) {
       // Species in list of species

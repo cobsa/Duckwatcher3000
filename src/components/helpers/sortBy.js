@@ -6,7 +6,7 @@ const sortBy = (array, orderBy, descending = false) => {
     let aToOrder = a[orderBy]
     let bToOrder = b[orderBy]
     // Return original table if orderBy argument is invalid
-    if (aToOrder == undefined || bToOrder == undefined) {
+    if (aToOrder === undefined || bToOrder === undefined) {
       return array
     }
     if (typeof aToOrder === 'string' && typeof bToOrder === 'string') {
@@ -14,7 +14,7 @@ const sortBy = (array, orderBy, descending = false) => {
       bToOrder = bToOrder.toLowerCase()
     }
     // Reverse sort order for species and description to allow default order to be A-Z instead Z-A
-    if (orderBy == 'description' || orderBy == 'species') {
+    if (orderBy === 'description' || orderBy === 'species') {
       if (aToOrder < bToOrder) {
         return 1
       }

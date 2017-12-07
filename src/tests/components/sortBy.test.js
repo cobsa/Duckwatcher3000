@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 
-import sortBy from '../../components/sortBy'
+import sortBy from '../../components/helpers/sortBy'
 
 let arrayToSort
 

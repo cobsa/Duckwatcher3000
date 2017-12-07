@@ -16,7 +16,7 @@ import { Redirect } from 'react-router-dom'
 import { SightingsComponent } from '../../pages/sightings'
 import Empty from '../../components/table/empty'
 import Filter from '../../components/filterComponent'
-import Loading from '../../components/loading'
+import Loading from '../../components/common/loading'
 
 Enzyme.configure({ adapter: new Adapter() })
 let sightingsInitial = {

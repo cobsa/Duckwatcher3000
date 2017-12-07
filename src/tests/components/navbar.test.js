@@ -9,7 +9,7 @@ import { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import sinon from 'sinon'
 
-import { NavbarComponent } from '../../components/navbar'
+import { NavbarComponent } from '../../components/common/navbar'
 
 Enzyme.configure({ adapter: new Adapter() })
 

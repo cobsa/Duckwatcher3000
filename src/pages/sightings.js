@@ -9,11 +9,11 @@ import { getTranslate } from 'react-localize-redux'
 // Custom packages
 
 import * as sightingActions from '../redux/actions/sightingsActions'
-import sortBy from '../components/sortBy'
-import filterBy from '../components/filterBy'
+import sortBy from '../components/helpers/sortBy'
+import filterBy from '../components/helpers/filterBy'
 import Header from '../components/table/header'
 import Sighting from '../components/table/row'
-import Loading from '../components/loading'
+import Loading from '../components/common/loading'
 import Filter from '../components/filterComponent'
 import Empty from '../components/table/empty'
 
@@ -78,7 +78,7 @@ export class SightingsComponent extends React.Component {
     let listOfSightings
     let emptyAlert
     // If sightings status is "FETCHED" filter and sort data, otherwise show loading component
-    if (status.code == 'FETCHED') {
+    if (status.code === 'FETCHED') {
       // Filter list
       let filteredSightings = filterBy(sightings, {
         filterBy: this.props.sightings.filter.column,

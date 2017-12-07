@@ -19,7 +19,7 @@ import 'react-s-alert/dist/s-alert-css-effects/scale.css'
 import Sightings from './pages/sightings'
 import AddSighting from './pages/addSighting'
 import rootReducer from './redux/reducers/rootReducer'
-import Navbar from './components/navbar'
+import Navbar from './components/common/navbar'
 import rootSaga from './redux/sagas/sagas'
 import cookiesMiddleware from './redux/middlewares/cookies'
 

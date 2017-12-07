@@ -12,7 +12,7 @@ import * as speciesActions from '../redux/actions/speciesActions'
 import TextInput from '../components/form/textInput'
 import SelectInput from '../components/form/selectInput'
 import DatePicker from '../components/form/dateTimePicker'
-import Loading from '../components/loading'
+import Loading from '../components/common/loading'
 
 // Connect to store
 const mapStateToProps = state => {
@@ -95,7 +95,7 @@ export class AddSightingComponent extends React.Component {
   handleCount(e) {
     e.preventDefault()
     // Check if value is null
-    if (e.target.value != '') {
+    if (e.target.value !== '') {
       const value = parseInt(e.target.value, 10)
       let valid = false
       if (value > 0) {
@@ -123,7 +123,7 @@ export class AddSightingComponent extends React.Component {
     const { value } = e.target
     const { species } = this.props.species
     const valid = species.find(duck => {
-      return duck.name == value
+      return duck.name === value
     })
     this.setState({
       species: {
@@ -215,7 +215,7 @@ export class AddSightingComponent extends React.Component {
   render() {
     const { species } = this.props.species
     const { translate } = this.props
-    if (this.props.species.status.code == 'FETCHED') {
+    if (this.props.species.status.code === 'FETCHED') {
       if (this.state.redirect) {
         // Redirect if adding successful
         return <Redirect to="/" />

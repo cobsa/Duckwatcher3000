@@ -15,7 +15,7 @@ import moment from 'moment'
 import { Redirect } from 'react-router-dom'
 // Custom components
 import { AddSightingComponent } from '../../pages/addSighting'
-import Loading from '../../components/loading'
+import Loading from '../../components/common/loading'
 import TextInput from '../../components/form/textInput'
 import SelectInput from '../../components/form/selectInput'
 import DatePicker from '../../components/form/dateTimePicker'
