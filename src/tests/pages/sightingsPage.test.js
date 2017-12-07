@@ -54,16 +54,6 @@ test('Should render page', () => {
   )
   expect(page.exists()).toBeTruthy()
 })
-test('Should render empty component', () => {
-  const page = shallow(
-    <SightingsComponent
-      sightings={sightingsInitialNoData}
-      updateSightings={sinon.spy()}
-      translate={sinon.spy()}
-    />
-  )
-  expect(page.find(Empty).length).toEqual(1)
-})
 test('Should render filter component', () => {
   const page = shallow(
     <SightingsComponent

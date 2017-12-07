@@ -6,7 +6,7 @@ import { CSSTransition } from 'react-transition-group'
 import { setTimeout } from 'timers'
 import '../../static/css/new-row-transitions.css'
 
-export default class Sighting extends React.Component {
+export default class Row extends React.Component {
   constructor(props) {
     super(props)
     this.state = {

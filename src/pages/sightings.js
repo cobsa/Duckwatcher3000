@@ -9,13 +9,9 @@ import { getTranslate } from 'react-localize-redux'
 // Custom packages
 
 import * as sightingActions from '../redux/actions/sightingsActions'
-import sortBy from '../components/helpers/sortBy'
-import filterBy from '../components/helpers/filterBy'
-import Header from '../components/table/header'
-import Sighting from '../components/table/row'
-import Loading from '../components/common/loading'
 import Filter from '../components/filterComponent'
-import Empty from '../components/table/empty'
+import Loading from '../components/common/loading'
+import Table from '../components/table/table'
 
 const mapStateToProps = state => {
   return {
@@ -73,86 +69,27 @@ export class SightingsComponent extends React.Component {
   }
 
   render() {
-    const { sightings, status } = this.props.sightings
-    const { translate } = this.props
-    let listOfSightings
-    let emptyAlert
+    const { status } = this.props.sightings
     // If sightings status is "FETCHED" filter and sort data, otherwise show loading component
     if (status.code === 'FETCHED') {
-      // Filter list
-      let filteredSightings = filterBy(sightings, {
-        filterBy: this.props.sightings.filter.column,
-        filterArguments: this.props.sightings.filter.filterArguments
-      })
-      if (filteredSightings.length > 0) {
-        // Sort list
-        let sortedSightings = sortBy(
-          filteredSightings,
-          this.props.sightings.order.column,
-          this.props.sightings.order.direction == 'ASCENDING' ? true : false
-        )
-        listOfSightings = sortedSightings.map(sighting => {
-          return (
-            <Sighting
-              key={sighting.id}
-              {...sighting}
-              newSightingID={this.props.sightings.newSightingID}
-              resetNewID={this.props.resetNewID}
-            />
-          )
-        })
-      } else {
-        emptyAlert = <Empty message={translate('filter.noResults')} />
-      }
+      return (
+        <div>
+          <Filter
+            handleSpecies={this.handleSpecies}
+            handleStartTime={this.handleStartTime}
+            handleEndTime={this.handleEndTime}
+            resetFilters={this.resetFilters}
+          />
+          <Table
+            {...this.props.sightings}
+            handleSort={this.handleSort}
+            translate={this.props.translate}
+          />
+        </div>
+      )
     } else {
       return <Loading />
     }
-    return (
-      <div>
-        <Filter
-          handleSpecies={this.handleSpecies}
-          handleStartTime={this.handleStartTime}
-          handleEndTime={this.handleEndTime}
-          resetFilters={this.resetFilters}
-        />
-        <table className="table table-hover">
-          <thead className="thead-dark">
-            <tr>
-              <Header
-                orderBy={this.props.sightings.order.column}
-                reverseOrder={this.props.sightings.order.direction == 'ASCENDING' ? true : false}
-                name={translate('table.dateTime')}
-                type="dateTime"
-                onClick={this.handleSort}
-              />
-              <Header
-                orderBy={this.props.sightings.order.column}
-                reverseOrder={this.props.sightings.order.direction == 'ASCENDING' ? true : false}
-                name={translate('table.description')}
-                type="description"
-                onClick={this.handleSort}
-              />
-              <Header
-                orderBy={this.props.sightings.order.column}
-                reverseOrder={this.props.sightings.order.direction == 'ASCENDING' ? true : false}
-                name={translate('table.species')}
-                type="species"
-                onClick={this.handleSort}
-              />
-              <Header
-                orderBy={this.props.sightings.order.column}
-                reverseOrder={this.props.sightings.order.direction == 'ASCENDING' ? true : false}
-                name={translate('table.count')}
-                type="count"
-                onClick={this.handleSort}
-              />
-            </tr>
-          </thead>
-          <tbody>{listOfSightings}</tbody>
-        </table>
-        {emptyAlert}
-      </div>
-    )
   }
 }
 

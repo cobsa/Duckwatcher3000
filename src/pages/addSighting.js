@@ -94,28 +94,21 @@ export class AddSightingComponent extends React.Component {
 
   handleCount(e) {
     e.preventDefault()
+    let value = ''
     // Check if value is null
     if (e.target.value !== '') {
-      const value = parseInt(e.target.value, 10)
-      let valid = false
-      if (value > 0) {
-        valid = true
-      }
-      this.setState({
-        count: {
-          value,
-          valid
-        }
-      })
-    } else {
-      // Allows user to erase all numbers from count input
-      this.setState({
-        count: {
-          value: e.target.value,
-          valid: false
-        }
-      })
+      value = parseInt(e.target.value, 10)
     }
+    let valid = false
+    if (value > 0) {
+      valid = true
+    }
+    this.setState({
+      count: {
+        value,
+        valid
+      }
+    })
   }
 
   handleSpecies(e) {
@@ -134,22 +127,18 @@ export class AddSightingComponent extends React.Component {
   }
 
   handleDateTimeChange(date) {
+    let value = moment().startOf('hour')
+    let valid = false
     if (date instanceof moment) {
-      let valid = date.isBefore(moment())
-      this.setState({
-        dateTime: {
-          value: date,
-          valid
-        }
-      })
-    } else {
-      this.setState({
-        dateTime: {
-          value: moment().startOf('hour'),
-          valid: false
-        }
-      })
+      valid = date.isBefore(moment())
+      value = date
     }
+    this.setState({
+      dateTime: {
+        value,
+        valid
+      }
+    })
   }
 
   validateInputs() {
